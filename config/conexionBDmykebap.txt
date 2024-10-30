@@ -1,0 +1,1 @@
+mysql:host=localhost;dbname=mykebap,root,Fran1234
