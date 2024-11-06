@@ -35,7 +35,6 @@ class Kebab implements ToJSON {
         }else{
             $this->id = $id;
         }
-
     }
 
     /**
@@ -63,7 +62,7 @@ class Kebab implements ToJSON {
      * @return string Representación de cadena del kebab
      */
     public function toString() : string {
-        return $this->id . '.' . $this->nombre . '.' . $this->descripcion. " precio ".$this->precio." ingredientes ".$this->getIngredientesIds();
+        return $this->id . '.' . $this->nombre . '.' . $this->descripcion. " precio ".$this->precio."€ ingredientes ".$this->getIngredientesIds();
     }
 
     // Método para obtener los IDs de los ingredientes

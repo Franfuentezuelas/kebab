@@ -19,7 +19,7 @@ class Pedido implements ToJSON {
         DateTime $fecha,
         Direccion $direccion, // Objeto Dirección
         Estado $estado = Estado::RECIBIDO, // Estado por defecto
-        array $lineas = [], // Array de líneas de pedido por defecto vacío
+        array $lineas = null, // Array de líneas de pedido por defecto vacío
         float $importe = 0.0 // Importe total inicial
     ) {
         $this->id = $id;

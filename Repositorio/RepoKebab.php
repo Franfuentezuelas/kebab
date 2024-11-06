@@ -179,7 +179,7 @@ class Repokebab implements RepoCrud
                 $fila["id"] ?? null,
                 $fila["nombre"],
                 $fila["foto"] ?? null,
-                $fila["precio"] ?? 0,
+                $kebab->precio,
                 $fila["descripcion"] ?? "",
                 RepoIngrediente::ingredientesPorKebab($fila["id"]), // Obtener los ingredientes del kebab con alérgenos incluidos
                 $fila["kebab_id"] ?? null
@@ -189,6 +189,8 @@ class Repokebab implements RepoCrud
         // Si no encuentra ninguno personalizado, crear uno nuevo
         if (is_null($kebabNueno)) {
             $kebabNueno = RepoKebab::nuevo($kebab);
+        }else{
+            $kebabNueno = self::update($kebab);
         }
     
         // Devolver el kebab nuevo o encontrado

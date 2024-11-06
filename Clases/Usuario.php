@@ -18,7 +18,7 @@ class Usuario implements ToJSON {
         float $saldo = 0.0,
         array $direcciones = null,
         array $alergenos = null,
-        array $pedidos = null
+        //array $pedidos = null
     ) {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -32,7 +32,7 @@ class Usuario implements ToJSON {
         $this->saldo = $saldo;
         $this->direcciones = $direcciones;// Asignación del array de direcciones
         $this->alergenos = $alergenos; // Asignación del array de alérgenos
-        $this->pedidos = $pedidos; // Asignación del array de pedidos
+        //$this->pedidos = $pedidos; // Asignación del array de pedidos
     }
 
     /**
