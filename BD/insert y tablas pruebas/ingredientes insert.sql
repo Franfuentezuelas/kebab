@@ -1,0 +1,21 @@
+INSERT INTO ingrediente (nombre, imagen, precio, descripcion) VALUES
+('Pan de Pita', 'pan_de_pita.jpg', 0.80, 'Pan de pita suave y ligero'),
+('Tortilla de Trigo', 'tortilla_de_trigo.jpg', 0.70, 'Tortilla de trigo para kebabs'),
+('Pan Libanés', 'pan_libanes.jpg', 0.90, 'Pan tradicional libanés, suave y delgado'),
+('Lechuga', 'lechuga.jpg', 0.50, 'Fresca lechuga verde'),
+('Tomate', 'tomate.jpg', 0.50, 'Rodajas de tomate jugoso'),
+('Cebolla', 'cebolla.jpg', 0.50, 'Cebolla blanca crujiente'),
+('Pepino', 'pepino.jpg', 0.50, 'Rodajas de pepino fresco'),
+('Pimiento', 'pimiento.jpg', 0.60, 'Pimiento rojo y verde, fresco y crujiente'),
+('Queso', 'queso.jpg', 1.00, 'Queso rallado suave'),
+('Salsa Yogur', 'salsa_yogur.jpg', 0.70, 'Salsa de yogur cremosa'),
+('Salsa Picante', 'salsa_picante.jpg', 0.70, 'Salsa picante para un toque especial'),
+('Pollo', 'pollo.jpg', 1.50, 'Carne de pollo marinada y asada'),
+('Ternera', 'ternera.jpg', 1.80, 'Carne de ternera jugosa'),
+('Cordero', 'cordero.jpg', 2.00, 'Carne de cordero con especias'),
+('Falafel', 'falafel.jpg', 1.20, 'Bolitas de falafel de garbanzos'),
+('Queso de Cabra', 'queso_de_cabra.jpg', 1.50, 'Queso de cabra suave y cremoso'),
+('Huevo', 'huevo.jpg', 0.80, 'Huevo cocido y en rodajas'),
+('Zanahoria', 'zanahoria.jpg', 0.50, 'Zanahoria rallada fresca'),
+('Salsa Mahonesa', 'salsa_mahonesa.jpg', 0.70, 'Salsa mahonesa cremosa');
+
