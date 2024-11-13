@@ -1,0 +1,424 @@
+/* Reset de márgenes y paddings, y configuración del box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general para el body y html */
+html, body {
+    height: 100%; /* Permite que el body tome todo el alto de la ventana */
+    display: flex; /* Utiliza Flexbox para el layout */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    font-family: Arial, sans-serif; /* Fuente general para el texto */
+    background-color: black; /* Color de fondo de la página */
+}
+
+/* Estilo para el header */
+header {
+    display: flex; /* Utiliza Flexbox para alinear los elementos dentro del header */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 10px; /* Espaciado interno del header */
+    background-color: #fc9b0b; /* Color de fondo del header */
+    color: #fff; /* Color del texto del header */
+    position: relative; /* Para posicionar los elementos hijos de forma absoluta */
+}
+
+/* Estilo del título (h1) */
+header h1 {
+    font-size: 2.5em; /* Aumentado tamaño del título */
+    font-weight: bold; /* Negrita para el título */
+}
+
+/* Estilo común para los iconos */
+.icon {
+    width: 40px; /* Ancho de los iconos */
+    height: 40px; /* Alto de los iconos */
+    border-radius: 50%; /* Bordes redondeados para hacerlos circulares */
+    background-color: #555; /* Color de fondo predeterminado para los iconos */
+    display: flex; /* Utiliza Flexbox para centrar contenido dentro del icono */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    color: #fff; /* Color del texto dentro del icono */
+    font-size: 1.5em; /* Tamaño de la fuente del icono */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    position: absolute; /* Permite posicionar los iconos en el header */
+}
+
+/* Estilo específico para el icono del usuario */
+#user {
+    left: 20px; /* Posiciona el icono del usuario a la izquierda 
+    background-image: url('https://api.dicebear.com/9.x/pixel-art/svg?seed=francisco');
+    background-size: cover; /* Asegura que la imagen cubra todo el div */
+    background-position: center; /* Centra la imagen en el div */
+    width: 40px; /* Ajusta el ancho según sea necesario */
+    height: 40px; /* Ajusta la altura según sea necesario */
+    border-radius: 50%; /* Hace que el div sea redondo, opcional */
+}
+/* #user {
+    left: 20px; /* Posiciona el icono del usuario a la izquierda 
+    //*background-image: url('https://ui-avatars.com/api/?name=No+Registrado'); /* Imagen de fondo del icono 
+    background-size: cover; /* Cubre todo el área del icono 
+    background-position: center; /* Centra la imagen dentro del icono 
+} */
+
+/* Estilo específico para el icono del carrito */
+#carrito {
+    background-image: url('../imagenes/carro1.jpg'); /* Imagen de fondo del icono del carrito */
+    background-size: contain; /* Ajusta la imagen para que esté completamente visible */
+    background-position: center; /* Centra la imagen dentro del icono */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    position: absolute; /* Permite posicionar el icono en el header */
+    right: 20px; /* Posiciona el icono del carrito a la derecha */
+}
+
+/* Estilo para el menú de navegación */
+nav {
+    background-color: #444; /* Color de fondo del menú de navegación */
+}
+
+/* Estilo para la lista de navegación */
+nav ul {
+    display: flex; /* Utiliza Flexbox para alinear los elementos de la lista */
+    list-style: none; /* Elimina los puntos de la lista */
+    justify-content: center; /* Centra la lista horizontalmente */
+    padding: 10px; /* Espaciado interno de la lista */
+}
+
+/* Estilo para los elementos de la lista */
+nav ul li {
+    margin: 0 15px; /* Espaciado horizontal entre elementos de la lista */
+}
+
+/* Estilo para los enlaces en el menú */
+nav ul li a {
+    color: #fff; /* Color del texto del enlace */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    font-weight: bold; /* Negrita para el texto del enlace */
+    padding: 8px 16px; /* Espaciado interno del enlace */
+    border-radius: 5px; /* Bordes redondeados para los enlaces */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color de fondo */
+    font-size: 1.2em; /* Aumentado tamaño del texto del nav */
+}
+
+/* Efecto hover para los enlaces */
+nav ul li a:hover {
+    background-color: #666; /* Cambia el color de fondo al pasar el mouse */
+}
+
+/* Estilo para el contador de artículos en el carrito */
+.item-count {
+    position: absolute; /* Permite posicionar el contador dentro del icono del carrito */
+    top: -5px; /* Posiciona el contador hacia arriba */
+    right: -5px; /* Posiciona el contador hacia la derecha */
+    width: 20px; /* Ancho del contador */
+    height: 20px; /* Alto del contador */
+    background-color: rgb(0, 255, 170); /* Color de fondo del contador */
+    color: #333; /* Color del texto del contador */
+    border-radius: 50%; /* Bordes redondeados para hacer el contador circular */
+    font-size: 0.75em; /* Tamaño del texto del contador */
+    font-weight: bold; /* Negrita para el texto del contador */
+    display: flex; /* Utiliza Flexbox para centrar el contenido dentro del contador */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+}
+
+/* Estilo para el enlace marcado en el menú */
+.marcado {
+    background-color: #f0bc91; /* Color de fondo para el enlace marcado */
+    color: #000000; /* Color del texto para el enlace marcado */
+    font-weight: bold; /* Negrita para el texto del enlace marcado */
+    padding: 8px 16px; /* Espaciado interno del enlace marcado */
+    border-radius: 5px; /* Bordes redondeados para el enlace marcado */
+}
+
+/* Estilos para el cuerpo principal */
+main {
+    display: flex;
+    padding: 0; /* Espaciado interno del cuerpo */
+}
+
+/* Estilo para la sección de bienvenida */
+.bienvenida {
+    text-align: center; /* Centra el texto de bienvenida */
+    margin-bottom: 20px; /* Espaciado inferior para separar de otros elementos */
+}
+
+
+/* Estilo para cada producto */
+.producto {
+
+    /*background-color: #f0f0f0; /* Color de fondo de cada producto */
+    /*padding: 15px; /* Espaciado interno de cada producto */
+    border-radius: 8px; /* Bordes redondeados para cada producto */
+    text-align: center; /* Centra el texto dentro del producto */
+    /*width: 200px; /* Ancho fijo para los productos */
+}
+
+/* Estilo para el título de cada producto */
+.producto h3 {
+    font-size: 3em;
+    color: rgb(43, 61, 163); /* Color del texto del título del producto */
+    margin-bottom: 5px; /* Espaciado inferior del título */
+}
+
+/* Estilo para la descripción de cada producto */
+.producto p {
+    font-size: 1.2em;
+    color: #1dc0d6; /* Color del texto de la descripción del producto */
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #333; /* Color de fondo del footer */
+    color: #fff; /* Color del texto del footer */
+    padding: 20px; /* Espaciado interno del footer */
+    text-align: center; /* Centra el texto del footer */
+    font-size: 0.9em; /* Tamaño del texto del footer */
+    width: 100%; /* Asegura que el footer ocupe todo el ancho */
+}
+
+/* Estilos para los párrafos y enlaces dentro del footer */
+footer p, footer a {
+    margin: 5px 0; /* Espaciado vertical entre párrafos y enlaces */
+    color: #fff; /* Color del texto de los párrafos y enlaces del footer */
+}
+
+/* Efecto hover para los enlaces del footer */
+footer a:hover {
+    text-decoration: underline; /* Subraya el enlace al pasar el mouse */
+}
+
+/* styles.css */
+
+/* Estilo para centrar el título */
+h2 {
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* Estilo para los productos */
+.producto {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*background-color: #f0f0f0; /* Color de fondo del producto */
+    border: 1px solid #ccc; /* Borde alrededor del producto */
+    transition: transform 0.2s; /* Efecto de transición suave */
+}
+
+.producto:hover {
+    transform: scale(1.05); /* Efecto de agrandar el producto al pasar el cursor */
+}
+
+/* .carousel-item {
+    height: 400px; /* Ajusta la altura según sea necesario 
+} */
+
+.producto {
+    height: 100%; /* Asegura que el contenedor del producto ocupe toda la altura del carrusel */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra horizontalmente el contenido */
+}
+
+.nav-link.marcado:hover {
+    background-color: #f8b68e; /* Color de fondo ligeramente diferente */
+    color: #333; /* Cambia el color del texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil para un efecto de elevación */
+    transform: scale(1.05); /* Amplía ligeramente el enlace */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para los cambios */
+}
+
+main section{
+    width: 100%;
+}
+
+
+.titulo-container h2 {
+    margin-bottom: 20px; /* Espacio entre el título y el carrusel */
+    font-size: 2rem;     /* Tamaño del título */
+}
+
+.carousel-inner .carousel-item {
+    width: 100%;
+    /*max-width: 600px;   /* Tamaño máximo del carrusel */
+}
+
+@media (max-width: 768px) {
+    /* Ajustes para pantallas móviles */
+    .carousel-inner .carousel-item {
+        max-width: 100%; /* El carrusel ocupará el ancho completo en móvil */
+    }
+}
+main    {
+background-color: black;
+}
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+}
+.carousel {
+    width: 100%;
+    height: 100%;
+}
+  
+section{
+    width: 100%;
+}
+.personalizar{
+    width: 45%;
+    height: 50px;
+    font-weight: bold;
+    background-color: rgb(89, 123, 100);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.personalizar:hover{
+    background-color: rgb(130, 125, 218);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.personalizar:active{
+    background-color: rgb(255, 102, 0);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.botonComprar{
+    width: 45%;
+    height: 50px;
+    font-weight: bold;
+    background-color: rgb(0, 255, 81);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.botonComprar:hover{
+    background-color: rgb(130, 125, 218);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.botonComprar:active{
+    background-color: rgb(255, 102, 0);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.botones{
+    margin-top: 2em;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.productos {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se distribuyan en varias filas */
+    justify-content: center; /* Centra los productos horizontalmente */
+}
+
+
+/* Ajustes de los productos para que su posicion sea siempre la misma */
+
+.producto {
+    display: flex;
+    flex-direction: column;  /* Apila los elementos verticalmente */
+    justify-content: space-between; /* Distribuye los elementos, con espacio entre ellos */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura disponible */
+    padding: 15px;
+    text-align: center;
+    position: relative;
+}
+
+.producto-titulo {
+    margin-top: 5%; /* Espacio de 5% desde la parte superior */
+}
+
+.producto-titulo h3 {
+    margin: 0; /* Evitar márgenes adicionales por defecto */
+}
+
+.producto-descripcion {
+    flex-grow: 1; /* Hace que la descripción ocupe el espacio restante entre el título y el precio */
+    display: flex;
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente */
+}
+
+.producto-precio {
+    margin-top: 10px; /* Ajusta el espacio entre la descripción y el precio */
+    margin-bottom: 20px; /* Espacio entre el precio y los botones */
+}
+
+.producto-botones {
+    margin-top: auto; /* Los botones se empujan hacia abajo */
+    margin-bottom: 2%; /* Espacio de 2% desde la parte inferior */
+}
+
+.producto-botones input {
+    margin-top: 5px; /* Espacio entre los botones */
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.producto-botones input:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+

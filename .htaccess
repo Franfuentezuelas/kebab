@@ -1,2 +1,29 @@
+# Desactiva el listado de directorios
 Options -Indexes
+Options +FollowSymLinks
+
+# Define index.php como el archivo predeterminado para el directorio principal
 DirectoryIndex index.php
+
+# Activa el motor de reescritura para permitir las reglas personalizadas de URL
+RewriteEngine On
+
+# Redirige las solicitudes que vienen de www.mykebab.com/api/ a Api/Api.php
+RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
+RewriteRule ^aplicacion/(.+) /Api/Api.php?var=$1 [L]
+
+# Redirige todas las demás solicitudes a index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?var=$1 [L]
+
+
+
+# Redirige cualquier solicitud que venga de www.mykebab.com/api/ seguido de cualquier cosa
+# a la ruta Api/Api.php
+
+#RewriteRule ^aplicacion/(.+) /Api/Api.php?var=$1 [L]
+
+
+
+#RewriteRule ^api\/(.+)$ /servidor%20proyectos/kebab/Api/Api.php?var=$1 [L,QSA]

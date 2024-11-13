@@ -261,6 +261,7 @@ class RepoIngrediente implements RepoCrud
         $parametros = [':kebab_id' => $kebab_id];
         // Preparar la consulta
         $consulta = $con->prepare($sql);
+        
         // Ejecutar la consulta
         $resultado = $consulta->execute($parametros);
     
@@ -268,7 +269,8 @@ class RepoIngrediente implements RepoCrud
         if ($resultado) {
             // Recorremos los resultados
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                // Crear el objeto Ingrediente y obtener sus alérgenos
+                //echo "Obteniendo ingrediente: " . $fila["ingrediente_id"] . "<br>";
+                // Crear el objeto Ingrediente
                 $ingrediente = new Ingrediente(
                     $fila["ingrediente_id"] ?? null,
                     $fila["ingrediente_nombre"],
@@ -276,14 +278,15 @@ class RepoIngrediente implements RepoCrud
                     $fila["ingrediente_precio"] ?? null,
                     $fila["ingrediente_descripcion"] ?? null
                 );
-                // Recuperar y asignar los alérgenos del ingrediente
                 $ingrediente->alergenos = RepoAlergenos::alergenosIngrediente($fila["ingrediente_id"]);
+                
                 // Añadir el ingrediente al array
                 $ingredientes[] = $ingrediente;
             }
         }
-    
+        
         // Devolver el array de ingredientes
         return $ingredientes;
     }
+    
 }

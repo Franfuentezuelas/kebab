@@ -190,7 +190,8 @@ class Repokebab implements RepoCrud
         if (is_null($kebabNueno)) {
             $kebabNueno = RepoKebab::nuevo($kebab);
         }else{
-            $kebabNueno = self::update($kebab);
+            //echo "Actualizanco PRECIO";
+            RepoKebab::updatePrecio($kebabNueno);
         }
     
         // Devolver el kebab nuevo o encontrado
@@ -198,10 +199,12 @@ class Repokebab implements RepoCrud
     }
 
     public static function update($kebab) {
+
+        $kebabModificado=null;
         // Obtener la conexión a la base de datos
         $con = Conexion::getConection();
         
-        // Crear la consulta de actualización
+        // Crear la consulta de actualización solo para la tabla KEBAB
         $sql = "UPDATE KEBAB SET nombre = :nombre, foto = :foto, precio = :precio, descripcion = :descripcion, kebab_id = :kebab_id WHERE id = :id";
         
         // Preparar la consulta
@@ -219,29 +222,36 @@ class Repokebab implements RepoCrud
         
         // Ejecutar la consulta
         if ($consulta->execute($parametros)) {
-            // Actualizar los ingredientes en KEBAB_INGREDIENTES
-            $sql2 = "DELETE FROM KEBAB_INGREDIENTES WHERE kebab_id = :kebab_id";
-            $deleteConsulta = $con->prepare($sql2);
-            $deleteConsulta->execute([':kebab_id' => $kebab->id]);
-    
-            $sql3 = "INSERT INTO KEBAB_INGREDIENTES (kebab_id, ingrediente_id) VALUES (:kebab_id, :ingrediente_id)";
-            $subConsulta = $con->prepare($sql3);
-    
-            foreach ($kebab->ingredientes as $ingrediente) {
-                $parametros2 = [
-                    ':kebab_id' => $kebab->id,
-                    ':ingrediente_id' => $ingrediente->id
-                ];
-                $subConsulta->execute($parametros2);
-            }
-            
-            // Actualizar los ingredientes del kebab desde el repositorio
-            $kebab->ingredientes = RepoIngrediente::ingredientesPorKebab($kebab->id);
-        }else{
-            $kebab=null;
+            //echo "actualizado";
+            $kebabModificado = $kebab;  // Devolver el objeto kebab actualizado si la consulta fue exitosa
         }
+            return $kebabModificado;  // Retornar null si la actualización falló
+    }
+    
+    public static function updatePrecio($kebab) {
+
+        $kebabModificado=null;
+        // Obtener la conexión a la base de datos
+        $con = Conexion::getConection();
         
-        return $kebab;
+        // Crear la consulta de actualización solo para la tabla KEBAB
+        $sql = "UPDATE KEBAB SET precio = :precio WHERE id = :id";
+        
+        // Preparar la consulta
+        $consulta = $con->prepare($sql);
+        
+        // Asignar los parámetros usando las propiedades del objeto kebab
+        $parametros = [
+            ':id' => $kebab->id,
+            ':precio' => $kebab->precio
+        ];
+        
+        // Ejecutar la consulta
+        if ($consulta->execute($parametros)) {
+            //echo "actualizado PRECIO ";
+            $kebabModificado = $kebab;  // Devolver el objeto kebab actualizado si la consulta fue exitosa
+        }
+            return $kebabModificado;  // Retornar null si la actualización falló
     }
 
     public static function delete($kebab) {
@@ -325,13 +335,48 @@ class Repokebab implements RepoCrud
         if ($consulta->execute()) {
             // Recorremos los resultados utilizando un array asociativo
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                
                 $kebab = new Kebab(
                     $fila["id"] ?? null,
                     $fila["nombre"],
                     $fila["foto"] ?? null,
                     $fila["precio"] ?? 0,
                     $fila["descripcion"] ?? "",
-                    RepoIngrediente::ingredientesPorKebab($fila["id"]), // Obtener ingredientes con alérgenos
+                    $ingredientes = RepoIngrediente::ingredientesPorKebab($fila["id"]),
+                    $fila["kebab_id"] ?? null
+                );
+                $kebabs[] = $kebab;
+            }
+        }
+        // Devolver el array de objetos Kebab
+        return $kebabs;
+    }
+
+    public static function getDeCasa() {
+        // Obtener la conexión
+        $con = Conexion::getConection();
+        
+        // Array para almacenar los objetos Kebab
+        $kebabs = [];
+        
+        // Crear la consulta SQL
+        $sql = "SELECT * FROM KEBAB where kebab_id is null and id > 1";
+        
+        // Preparar la consulta
+        $consulta = $con->prepare($sql);
+        
+        // Ejecutar la consulta
+        if ($consulta->execute()) {
+            // Recorremos los resultados utilizando un array asociativo
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                
+                $kebab = new Kebab(
+                    $fila["id"] ?? null,
+                    $fila["nombre"],
+                    $fila["foto"] ?? null,
+                    $fila["precio"] ?? 0,
+                    $fila["descripcion"] ?? "",
+                    $ingredientes = RepoIngrediente::ingredientesPorKebab($fila["id"]),
                     $fila["kebab_id"] ?? null
                 );
                 $kebabs[] = $kebab;

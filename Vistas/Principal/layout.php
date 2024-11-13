@@ -1,41 +1,93 @@
+<?php
+    // quiero ortener la url que esta llamando a index.php con el parametro var
+    if(!isset($_GET['var'])){
+        $var="inicio";
+    }else{
+        $var=$_GET['var'];
+    }
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SANIMAL S.L.</title>
-    <link rel="stylesheet" href="./css/estilos.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-</head>
-
-<body>
     <?php
+        require_once './Vistas/Principal/head.php';
+    ?>
+</head>
+<body>
+<?php
         require_once './Vistas/Principal/header.php';
     ?>
-    <section>
-        <div id="cuerpo">
         <?php
-           require_once './Vistas/Principal/enruta.php';
-        ?>
-        </div>
-    </section>
-
-    <?php
+        switch ($var) {
+            case 'inicio':
+                require_once './Vistas/Principal/nav.php';
+                break;
+            case 'carta':
+                require_once './Vistas/Principal/navCarta.php';
+                break;
+            case 'gusto':
+                require_once './Vistas/Principal/navGusto.php';
+                break;
+            case 'registro':
+                require_once './Vistas/Principal/navRegistro.php';
+                break;
+            case 'login':
+                require_once './Vistas/Principal/navLogin.php';
+                break;
+            case 'contacto':
+                require_once './Vistas/Principal/navContacto.php';
+                break;
+            }
+        //require_once './Vistas/Principal/nav.php';
+    ?>
+        <?php
+        switch ($var) {
+            case 'inicio':
+                require_once './Vistas/Principal/main.php';
+                break;
+                case 'carta':
+                require_once './Vistas/Principal/mainCarta.php';
+                break;
+                case 'gusto':
+                require_once './Vistas/Principal/mainGusto.php';
+                break;
+                case 'registro':
+                require_once './Vistas/Principal/mainRegistro.php';
+                break;
+                case 'login':
+                require_once './Vistas/Principal/mainlogin.php';
+                break;
+                case 'contacto':
+                require_once './Vistas/Principal/maincontacto.php';
+                break;
+            }   
+    ?>
+        <?php
         require_once './Vistas/Principal/footer.php';
     ?>
-
+        <?php
+        require_once './Vistas/Principal/scripts.php';
+        switch ($var) {
+            case 'inicio':
+                require_once './Vistas/Principal/scriptsInicio.php';
+                break;
+            case 'carta':
+                require_once './Vistas/Principal/scriptsCarta.php';
+                break;
+            case 'gusto':
+                require_once './Vistas/Principal/scriptsGusto.php';
+                break;
+            case 'registro':
+                require_once './Vistas/Principal/scriptsRegistro.php';
+                break;
+            case 'login':
+                require_once './Vistas/Principal/scriptsLogin.php';
+                break;
+            case 'contacto':
+                require_once './Vistas/Principal/scriptsContacto.php';
+                break;
+            }
+    ?>
 </body>
-
 </html>

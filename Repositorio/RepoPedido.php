@@ -99,13 +99,12 @@ class RepoPedido
                 new DateTime($fila["fecha"]),
                 $fila["direccion"],
                 Estado::from($fila["estado"]), // Convierte el estado de la base de datos al enum
-                [], // Aquí podrías cargar las líneas de pedido si es necesario
                 (float)$fila["importe"]
             );
         }
         
         return $pedidos;
-    }    
+    }
     
     public static function updateEstado(Pedido $pedido, Estado $nuevoEstado): bool {
         $con = Conexion::getConection();

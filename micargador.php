@@ -16,7 +16,7 @@ class Autocargador
     // ahora miro si la en alguna de las parpetas esta la clase que necesitamos y hacemos include_once
         $contador=0;
         $correcto=false;
-        var_dump(count($carpetas));
+        //var_dump(count($carpetas));
         while(!$correcto && $contador<count($carpetas)){
             $fichero=$carpetas[$contador].'/'.$clase.'.php';
             if(file_exists($fichero))

@@ -4,8 +4,10 @@
     <?= $this->section('head')?>
 </head>
 <body>
-    <h1> layout </h1>
-    <?= $this->section('welcome')?>
-    <?= $this->section('listado')?>
+    <?= $this->section('header')?>
+    <?= $this->section('nav')?>
+    <?= $this->section('main')?>
+    <?= $this->section('footer')?>
+    <?= $this->section('scripts') ?>
 </body>
 </html>

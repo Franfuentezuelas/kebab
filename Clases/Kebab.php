@@ -16,7 +16,7 @@ class Kebab implements ToJSON {
     ) {
         
         $this->nombre = $nombre;
-        $this->foto = $foto;
+        $this->foto = $foto; // "/imagenes/".$foto;
         $this->descripcion = $descripcion;
         $this->ingredientes = $ingredientes; // Asignamos el array de ingredientes
         $this->kebab_id = $kebab_id; // Asignamos el kebab base
@@ -35,8 +35,9 @@ class Kebab implements ToJSON {
         }else{
             $this->id = $id;
         }
+        
+        
     }
-
     /**
      * Metodo implementado de la interfaz ToJSON
      * @return string JSON con el objeto

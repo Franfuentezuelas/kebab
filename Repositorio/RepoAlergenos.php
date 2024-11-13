@@ -3,6 +3,11 @@
 class RepoAlergenos implements RepoCrud
 {
 
+    /**
+     * @param mixed $alergeno
+     * 
+     * @return [type]
+     */
     public static function nuevo($alergeno) {
         
         // Obtener la conexión
@@ -32,6 +37,11 @@ class RepoAlergenos implements RepoCrud
     }
     
 
+    /**
+     * @param mixed $id
+     * 
+     * @return [type]
+     */
     public static function findByID($id) {
         $alergeno = null; // Inicializamos en null
     
