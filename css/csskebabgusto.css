@@ -1,0 +1,192 @@
+/* Estilos básicos */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    color: #0056b3;
+}
+
+main {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.producto-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 20px;
+}
+
+.producto-box {
+    border: 2px solid #ddd;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Columnas */
+.column {
+    flex: 1;
+    /*margin: 10px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.column img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.column p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.column h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Ingredientes y personalización */
+.column .items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /*margin-top: 10px;*/
+}
+
+.item {
+    background-color: #f0f0f0;
+    padding: 0;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 0.7em;
+    cursor: pointer;
+    flex: 1 1 50%; /* Asegura que los elementos tengan el mismo tamaño */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+}
+
+.item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Agregar líneas verticales entre las columnas */
+.column:nth-child(1) {
+    border-right: 2px solid #ddd; /* Línea vertical entre columnas 1 y 2 */
+}
+
+.column:nth-child(2) {
+    border-right: 2px solid #ddd; /* Línea vertical entre columnas 2 y 3 */
+}
+
+/* Línea horizontal que divide la parte superior de la inferior */
+.bottom-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #ddd; /* Línea horizontal divisoria */
+}
+
+.price, .allergens, .actions {
+    flex: 1;
+    text-align: center;
+}
+
+.allergens img {
+    width: 50px;
+    margin: 0 10px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.actions button {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .producto-container {
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .column {
+        margin: 0;
+    }
+
+    .bottom-section {
+        flex-direction: column;
+    }
+
+    .actions button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .item {
+        flex: 1 1 100%; /* En pantallas pequeñas, los items ocupan el 100% */
+    }
+}
+
+#alergenos {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

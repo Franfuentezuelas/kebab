@@ -172,4 +172,38 @@ class RepoDireccion implements RepoCrud
         
         return $direcciones;
     }
+
+    public static function provincias() {
+        $con = Conexion::getConection();
+        $provincias = [];
+    
+        $sql = "SELECT * FROM provincia";
+        
+        $consulta = $con->prepare($sql);
+        
+        $consulta->execute();
+        
+        while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+               $provincia[]= $fila["nombre"];
+        }
+        return $provincias;
+    }
+
+    public static function localidades($provincia) {
+        $con = Conexion::getConection();
+        $localidades = [];
+    
+        $sql = "SELECT * FROM localidad WHERE nombreprov like upper(:provincia)";
+        
+        $consulta = $con->prepare($sql);
+        
+        $parametros = [':provincia' => $provincia];
+        
+        $consulta->execute($parametros);
+        
+        while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+               $provincia[]= $fila["nombreloc"];
+        }
+        return $localidades;
+    }
 }

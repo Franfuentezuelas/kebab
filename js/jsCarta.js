@@ -1,5 +1,21 @@
 window.addEventListener("load", function() {
+    
+    // Obtén el contenedor del carrito y el contador
+    var carrito = document.getElementById("carrito");
+    var contador = document.getElementById("contador");
 
+    // Verifica si el carrito ya está almacenado en localStorage
+    if (localStorage.getItem("carrito")) {
+        // Si existe, lo carga desde localStorage
+        carrito.kebabs = JSON.parse(localStorage.getItem("carrito"));
+    } else {
+        // Si no existe, crea un nuevo carrito vacío
+        carrito.kebabs = [];
+    }
+
+    // Si el contador es un span u otro elemento, agregamos el número al contenido actual
+    contador.textContent = carrito.kebabs.length; // Concatenamos el texto con el número de kebabs
+    contador.value = carrito.kebabs.length; // Concatenamos el texto con el número de kebabs
     // Función para cambiar el icono de usuario
     function cambiarIconoUsuario(seed) {
         const userDiv = document.getElementById('user');
@@ -24,6 +40,7 @@ window.addEventListener("load", function() {
                 // Creamos un div para cada item del carrusel
                 const elementoCarta = document.createElement("div");
                 elementoCarta.classList.add("col-12", "col-sm-12", "col-md-6", "col-lg-4", "col-xl-3");
+                elementoCarta.kebab = kebab;  // Asignamos el objeto kebab al elemento Carrusel
                 // Creamos el contenido HTML para cada kebab
                 elementoCarta.innerHTML = `
                     <div class="producto border rounded p-3 text-center">
@@ -54,8 +71,19 @@ window.addEventListener("load", function() {
                     alert("Personalizar");
                 });
 
+                // Al hacer clic en el botón "comprar"
                 botonComprar.addEventListener('click', function() {
-                    alert("Comprar");
+                    // Añadir el kebab al carrito (elementoCarrusel.kebab hace referencia al objeto kebab)
+                    carrito.kebabs.push(elementoCarta.kebab);
+                    
+                    // Guardar el carrito actualizado en localStorage
+                    localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
+
+                    // Actualizar el contador
+                    var contar = carrito.kebabs.length; // Número de kebabs en el carrito
+                    contador.value = contar;  // Actualiza el valor si el contador es un input
+                    contador.textContent = contar;  // Actualiza el texto si el contador es un span
+                    console.log(carrito.kebabs);
                 });
 
                 // Aplicamos la imagen de fondo al producto

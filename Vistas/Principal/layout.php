@@ -41,24 +41,25 @@
             }
         //require_once './Vistas/Principal/nav.php';
     ?>
+    
         <?php
         switch ($var) {
             case 'inicio':
                 require_once './Vistas/Principal/main.php';
                 break;
-                case 'carta':
+            case 'carta':
                 require_once './Vistas/Principal/mainCarta.php';
                 break;
-                case 'gusto':
+            case 'gusto':
                 require_once './Vistas/Principal/mainGusto.php';
                 break;
-                case 'registro':
+            case 'registro':
                 require_once './Vistas/Principal/mainRegistro.php';
                 break;
-                case 'login':
+            case 'login':
                 require_once './Vistas/Principal/mainlogin.php';
                 break;
-                case 'contacto':
+            case 'contacto':
                 require_once './Vistas/Principal/maincontacto.php';
                 break;
             }   

@@ -5,11 +5,19 @@
     box-sizing: border-box;
 }
 
+/* Mantiene el footer abajo de toda la pagina */
+body {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto auto 1fr auto;
+    background-color: black; /* Color de fondo de la página */
+}
+
 /* Estilo general para el body y html */
-html, body {
-    height: 100%; /* Permite que el body tome todo el alto de la ventana */
-    display: flex; /* Utiliza Flexbox para el layout */
-    flex-direction: column; /* Apila los elementos verticalmente */
+html {
+    /*height: 100%; /* Permite que el body tome todo el alto de la ventana */
+    /*display: flex; /* Utiliza Flexbox para el layout */
+    /*flex-direction: column; /* Apila los elementos verticalmente */
     font-family: Arial, sans-serif; /* Fuente general para el texto */
     background-color: black; /* Color de fondo de la página */
 }
@@ -420,5 +428,59 @@ section{
     background-color: #007bff;
     color: white;
 }
+
+/* contacto */
+#contactomain{
+    background-color: black;    
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el contenedor de contacto */
+#contacto {
+    background-color: rgb(0, 0, 0); /* Fondo negro para la sección de contacto */
+    color: white; /* Texto blanco */
+    display: flex; /* Usamos flexbox */
+    flex-direction: column; /* Apilamos los elementos verticalmente */
+    justify-content: flex-start; /* Alineamos los elementos en la parte superior */
+    align-items: center; /* Centrado horizontal */
+    padding: 30px 15px; /* Espacio alrededor */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra para darle un efecto elevado */
+    width: 80%; /* Establecer un ancho para que no ocupe toda la pantalla */
+    max-width: 900px; /* Un ancho máximo */
+    text-align: center; /* Centramos el texto por defecto */
+}
+
+/* Aseguramos que los divs dentro de #contacto se alineen y ocupen el 100% del ancho */
+#contacto div {
+    width: 100%; /* Cada div ocupa el 100% del ancho */
+    margin-bottom: 20px; /* Separación entre los bloques */
+}
+
+/* Estilos específicos para encabezados y párrafos */
+#contacto h2, #contacto h3, #contacto p {
+    margin: 0; /* Eliminamos márgenes adicionales */
+    text-align: center; /* Aseguramos que el texto esté centrado */
+    color: white; /* Color blanco para todos los textos */
+}
+
+/* Estilos de la lista */
+#contacto ul {
+    list-style-type: none; /* Eliminamos los puntos de la lista */
+    padding-left: 0; /* Eliminamos el padding izquierdo */
+    margin: 0; /* Eliminamos los márgenes */
+}
+
+#social {
+    list-style-type: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding */
+    display: flex; /* Usa flexbox para alinear los elementos en fila */
+    justify-content: space-evenly; /* Centra los elementos horizontalmente */
+}
+
 
 

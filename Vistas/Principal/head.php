@@ -11,3 +11,5 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Estilo de Bootstrap -->
     <link rel="stylesheet" href="css/css.css"><!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/csskebabgusto.css"><!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/alergenos.css"><!-- CSS personalizado -->

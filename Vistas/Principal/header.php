@@ -3,6 +3,6 @@
         </div>
         <h1 class="m-0">MYKEBAB</h1>
         <div class="icon" id="carrito">
-            <span class="item-count">0</span>
+            <span class="item-count" id="contador" value="0">0</span>
         </div>
     </header>
