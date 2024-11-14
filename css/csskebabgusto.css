@@ -111,7 +111,7 @@ main {
     border-radius: 5px;
     font-size: 0.7em;
     cursor: pointer;
-    flex: 1 1 50%; /* Asegura que los elementos tengan el mismo tamaño */
+    /* flex: 1 1 50%; Asegura que los elementos tengan el mismo tamaño */
     box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
 }
 
@@ -189,4 +189,21 @@ main {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+}
+
+
+.item.dragging {
+    opacity: 0.5;
+}
+
+#ingredientes {
+    height: 100%;
+    width: 100%;
+    min-width: 400px;
+}
+
+#personalizar {
+    height: 100%;
+    width: 100%;
+    min-width: 400px;
 }
