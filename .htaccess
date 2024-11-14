@@ -12,6 +12,10 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^aplicacion/(.+) /Api/Api.php?var=$1 [L]
 
+# Redirige las solicitudes que vienen de www.mykebab.com/personalizar/ a Api/ApiPersonalizar.php
+RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
+RewriteRule ^personalizar/(.+) /Api/ApiPersonalizar.php?var=$1 [L]
+
 # Redirige todas las demás solicitudes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

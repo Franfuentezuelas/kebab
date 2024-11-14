@@ -69,6 +69,30 @@ window.addEventListener("load", function() {
                 // Añadimos los eventos a los botones
                 personalizar.addEventListener('click', function() {
                     alert("Personalizar");
+                // ahora cargo la plantilla de personalizacion
+                fetch("http://www.mykebab.com/personalizar/plantilla")
+                    .then(response => response.text())
+                    .then(plantilla => {
+                        const personalizar = plantilla;
+                        // Añado la plantilla de personalizacion al html
+                        var div = document.createElement("div");
+                        //div.classList.add("producto-container");
+                        div.innerHTML = personalizar;
+                        document.getElementById("carta").appendChild(div);
+                        // oculto la seccion 
+                        const seccion = document.getElementById("seccion");
+                        // oculto la seccion
+                        seccion.style.display = "none";
+                    })
+                    .catch(error => {
+                        console.error("Error fetching pantilla de personalizacion:", error);
+                    })
+                    // ahora tengo que incluir el kebab en la personalizacion y los ingredientes
+                    // comprobar si el kebab tiene los mismos ingredientes que hay seleccionados
+                    // comprobar que el ingrediente no este repetido
+                    // agregar el ingrediente al div personalizar
+                    // agregar el ingrediente al div ingredientes
+                    sfdaipjasddfjasd{}
                 });
 
                 // Al hacer clic en el botón "comprar"
