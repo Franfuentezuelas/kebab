@@ -3,27 +3,6 @@ window.addEventListener("load", function() {
     var carrito = document.getElementById("carrito");
     var contador = document.getElementById("contador");
 
-    // Verifica si el carrito ya está almacenado en localStorage
-    if (localStorage.getItem("carrito")) {
-        carrito.kebabs = JSON.parse(localStorage.getItem("carrito"));
-    } else {
-        carrito.kebabs = [];
-    }
-
-    // Actualizamos el contador
-    contador.textContent = carrito.kebabs.length;
-    contador.value = carrito.kebabs.length;
-
-    // Función para cambiar el icono de usuario
-    function cambiarIconoUsuario(seed) {
-        const userDiv = document.getElementById('user');
-        const nuevaImagen = `https://api.dicebear.com/9.x/pixel-art/svg?seed=${seed}`;
-        userDiv.style.backgroundImage = `url('${nuevaImagen}')`;
-    }
-
-    // Cambiar el icono al cargar la página (por defecto vacío)
-    cambiarIconoUsuario('');
-
     // Función para mostrar el estado de "loading" (carga) mientras esperamos
     function mostrarLoading() {
         const loader = document.getElementById("loading");

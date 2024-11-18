@@ -64,7 +64,68 @@ class RepoUsuario implements RepoCrud
             );
         }
         return $usuario;
-    }    
+    }
+
+    public static function findByUser($usuario) {
+        $con = Conexion::getConection();
+        $sql = "SELECT * FROM Usuario WHERE usurio like upper(:usuario)";
+        
+        $consulta = $con->prepare($sql);
+        $parametros = [':usuario' => $usuario];
+        
+        $consulta->execute($parametros);
+        $usuario = null;
+        $fila = $consulta->fetch(PDO::FETCH_ASSOC);
+        
+        if ($fila) {
+            $usuario = new Usuario(
+                $fila["id"],
+                $fila["nombre"],
+                $fila["apellidos"],
+                $fila["telefono"],
+                $fila["usuario"],
+                $fila["pass"],
+                Tipo::from($fila["tipo"]), // Convertir tipo a enum
+                $fila["correo"],
+                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["saldo"],
+                RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
+                RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
+            );
+        }
+        return $usuario;
+    }
+
+    public static function login($usuario, $password) {
+        $con = Conexion::getConection();
+        $sql = "SELECT * FROM Usuario WHERE usurio like upper(:usuario) and pass like upper(:password)";
+        
+        $consulta = $con->prepare($sql);
+        $parametros = [':usuario' => $usuario,
+                        ':password' => $password];
+        
+        $consulta->execute($parametros);
+        $usuario = null;
+        $fila = $consulta->fetch(PDO::FETCH_ASSOC);
+        
+        if ($fila) {
+            $usuario = new Usuario(
+                $fila["id"],
+                $fila["nombre"],
+                $fila["apellidos"],
+                $fila["telefono"],
+                $fila["usuario"],
+                $fila["pass"],
+                Tipo::from($fila["tipo"]), // Convertir tipo a enum
+                $fila["correo"],
+                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["saldo"],
+                RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
+                RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
+            );
+        }
+        return $usuario;
+    }
 
     public static function findByObj($usuario) {
         $con = Conexion::getConection();

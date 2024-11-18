@@ -1,1 +1,1 @@
-    <script src="js/js.js"></script><!-- JS personalizado -->
+<script src="js/jsCarrusel.js"></script><!-- JS personalizado -->

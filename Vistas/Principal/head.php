@@ -13,3 +13,5 @@
     <link rel="stylesheet" href="css/css.css"><!-- CSS personalizado -->
     <link rel="stylesheet" href="css/csskebabgusto.css"><!-- CSS personalizado -->
     <link rel="stylesheet" href="css/alergenos.css"><!-- CSS personalizado -->
+    <script src="js/js.js"></script><!-- JS personalizado -->
+   

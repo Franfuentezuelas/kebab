@@ -4,27 +4,6 @@ window.addEventListener("load", function() {
     var carrito = document.getElementById("carrito");
     var contador = document.getElementById("contador");
 
-    // Verifica si el carrito ya está almacenado en localStorage
-    if (localStorage.getItem("carrito")) {
-        // Si existe, lo carga desde localStorage
-        carrito.kebabs = JSON.parse(localStorage.getItem("carrito"));
-    } else {
-        // Si no existe, crea un nuevo carrito vacío
-        carrito.kebabs = [];
-    }
-
-    // Si el contador es un span u otro elemento, agregamos el número al contenido actual
-    contador.textContent = carrito.kebabs.length; // Concatenamos el texto con el número de kebabs
-    contador.value = carrito.kebabs.length; // Concatenamos el texto con el número de kebabs
-    // Función para cambiar el icono de usuario
-    function cambiarIconoUsuario(seed) {
-        const userDiv = document.getElementById('user');
-        const nuevaImagen = `https://api.dicebear.com/9.x/pixel-art/svg?seed=${seed}`;
-        userDiv.style.backgroundImage = `url('${nuevaImagen}')`;
-    }
-
-    // Cambiar el icono al cargar la página (por defecto vacío)
-    cambiarIconoUsuario('');
 
     // incluir el evento de pulsar comprar
     const comprar = document.getElementById("comprar");
@@ -63,6 +42,10 @@ window.addEventListener("load", function() {
 
         if (mismoKebab) {
             alert("Tiene que tener al menos un ingrediente");
+            // metes en el carro el kebab de la casa
+            // y cambias el carro agregando el nuevo kebab
+            // cambias el numero de kebab que tiene el carro
+            
         }else{
             console.log(kebab);
             //solo metemos el kebab si almenos tiene un ingrediente

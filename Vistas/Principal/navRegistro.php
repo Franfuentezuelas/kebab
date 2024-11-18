@@ -13,12 +13,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="gusto">Kebab al gusto</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link marcado" href="#">Registro</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Login</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contacto">Contacto</a>
                 </li>

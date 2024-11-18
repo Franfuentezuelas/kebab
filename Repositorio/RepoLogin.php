@@ -7,21 +7,24 @@ class RepoLogin
         
         // Obtener la conexión
         $con = Conexion::getConection();
-        $existe=false;
+        $existe="false";
         // creo la consulta a la base de datos
-        $sql="SELECT * FROM usuario where user = :user";
+        $sql="SELECT * FROM usuario where usuario like :usuario ";
         
         // Preparar la consulta en la base de datos
         $consulta = $con->prepare($sql);
         
         // Crear un array con los parámetros necesarios para la consulta
         $parametros = [
-            ':user' => $usuario
+            ':usuario' => $usuario
         ];
         
         // Ejecutar la consulta en la base de datos y verificar si fue exitosa
         if ($consulta->execute($parametros)) {
-            $existe=true;
+            // Si el select tiene respuesta es que el usuario existe
+            if($consulta->rowCount()>0){
+                $existe="true";
+            }
         }
         return $existe;
     }
@@ -30,28 +33,27 @@ class RepoLogin
         
         // Obtener la conexión
         $con = Conexion::getConection();
-        $existe=false;
+        $existe="false";
         // Crear la consulta de inserción en la base de datos
-        $sql="SELECT * FROM usuario where usuario = :user AND pass = :pass" ;
+        $sql="SELECT * FROM usuario where usuario like :usuario AND pass like :pass " ;
         
         // Preparar la consulta en la base de datos
         $consulta = $con->prepare($sql);
         
         // Crear un array con los parámetros necesarios para la consulta
         $parametros = [
-            ':user' => $usuario,
+            ':usuario' => $usuario,
             ':pass' => $pass
         ];
         
         // Ejecutar la consulta en la base de datos y verificar si fue exitosa
         if ($consulta->execute($parametros)) {
-            // Si el INSERT fue exitoso, se llama a findByObj para obtener el alérgeno completo
-            $existe=false;
-        } else {
-            // Si el INSERT falla, devuelve null
-            $alergeno=null;
+            // Si el select tiene respuesta es que el usuario existe
+            if($consulta->rowCount()>0){
+                $existe="true";
+            }
         }
-        return $alergeno;
+        return $existe;
     }
     
     

@@ -13,6 +13,7 @@ body {
     background-color: black; /* Color de fondo de la página */
 }
 
+
 /* Estilo general para el body y html */
 html {
     /*height: 100%; /* Permite que el body tome todo el alto de la ventana */
@@ -25,8 +26,8 @@ html {
 /* Estilo para el header */
 header {
     display: flex; /* Utiliza Flexbox para alinear los elementos dentro del header */
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: space-between; /* Centra los elementos horizontalmente */
+    
     padding: 10px; /* Espaciado interno del header */
     background-color: #fc9b0b; /* Color de fondo del header */
     color: #fff; /* Color del texto del header */
@@ -51,12 +52,12 @@ header h1 {
     color: #fff; /* Color del texto dentro del icono */
     font-size: 1.5em; /* Tamaño de la fuente del icono */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
-    position: absolute; /* Permite posicionar los iconos en el header */
+    /*position: absolute; /* Permite posicionar los iconos en el header */
 }
 
 /* Estilo específico para el icono del usuario */
 #user {
-    left: 20px; /* Posiciona el icono del usuario a la izquierda 
+    /*left: 20px; /* Posiciona el icono del usuario a la izquierda 
     background-image: url('https://api.dicebear.com/9.x/pixel-art/svg?seed=francisco');
     background-size: cover; /* Asegura que la imagen cubra todo el div */
     background-position: center; /* Centra la imagen en el div */
@@ -78,7 +79,7 @@ header h1 {
     background-position: center; /* Centra la imagen dentro del icono */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     position: absolute; /* Permite posicionar el icono en el header */
-    right: 20px; /* Posiciona el icono del carrito a la derecha */
+    /*right: 20px; /* Posiciona el icono del carrito a la derecha */
 }
 
 /* Estilo para el menú de navegación */
@@ -369,7 +370,7 @@ section{
     margin-top: 2em;
     width: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .productos {
@@ -483,4 +484,28 @@ section{
 }
 
 
+#iconitos {
+    display: flex; /* Esto asegura que los elementos dentro de #iconitos estén en línea */
+    justify-content: flex-end; /* Alinea los elementos hacia la derecha */
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    gap: 15px; /* Espacio entre los elementos (puedes ajustarlo según tu necesidad) */
+}
 
+#iconitos .icon {
+    width: 30px; /* Ajusta el tamaño de los iconos */
+    height: 30px;
+    background-color: gray; /* Aquí puedes poner un color o imagen de fondo */
+    border-radius: 50%;
+}
+
+#iconitos a {
+    text-decoration: none;
+    color: white; /* Ajusta el color de los enlaces */
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.separacion{
+    margin: 10px 0 10px 0;
+    display: flex;
+}

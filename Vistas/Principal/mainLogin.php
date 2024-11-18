@@ -1,22 +1,43 @@
 <main class="container my-4">
-        <section class="productos text-center">
-            <!-- <div class="titulo-container">
-                <h2 class="text-center">Nuestros Productos</h2>  Título centrado 
-            </div>
-             -->
-            <div id="responsiveCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-                <div class="carousel-inner">
-                    <!-- Aquí se agregarán los elementos del carrusel desde JavaScript -->
+    <section class="productos text-center">
+        <form class="login-form" action="http://www.mykebab.com" method="post">
+            <h2>Iniciar sesión</h2>
+
+            <!-- Campo de usuario -->
+            <div class="input-group" title="El usuario debe tener entre 4 y 15 caracteres, y solo puede contener letras y números.">
+                <div class="label">
+                    <label for="username" >Usuario</label>
+                    <span class="error" id="errorusuario"> </span> <!-- Mensaje de error -->
                 </div>
-                <a class="carousel-control-prev" href="#responsiveCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#responsiveCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="login">
+                    <input type="text" id="usuario" name="username" placeholder="AntonioMagic">
+                </div>
             </div>
-            
-        </section>                
-    </main>     
+
+            <!-- Campo de contraseña -->
+            <div class="input-group" title="La contraseña debe tener al menos 8 caracteres, con una letra mayúscula, una minúscula y un número.">
+                <div class="label">
+                    <label for="password" >Contraseña</label>
+                    <span class="error" id="errorpassword"> </span> <!-- Mensaje de error -->
+                </div>
+                <div class="login">
+                    <input type="password" id="password" name="password" placeholder="Contraseña123@">
+                    <!-- Icono de ojo para mostrar/ocultar la contraseña -->
+                    <span id="togglePassword" class="eye-icon" title="Mostrar contraseña">
+                        <i class="fa fa-eye"></i> <!-- Icono de FontAwesome -->
+                    </span>
+                </div>
+            </div>
+
+            <!-- Botón de login -->
+            <button type="submit" class="btn-login" id="enviar">Iniciar sesión</button>
+
+            <!-- Enlace de registro -->
+            <div class="register-link">
+                <p>No tienes cuenta? <a href="registro">Regístrate</a></p>
+                <p class="mensaje" id="errorlogin"></p> <!-- Mensaje de error -->
+            </div>
+        </form>
+    </section>
+</main>
+

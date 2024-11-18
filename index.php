@@ -10,6 +10,11 @@ class Principal
     {
         //var_dump($_SERVER["DOCUMENT_ROOT"]);
         require_once 'micargador.php';
+       // si estamos enviando un login o registro
+        if (isset($_POST['submit'])) {
+            // aqui puedo redirigir al controlador para login o registro
+            require_once './controlador/acceso.php';
+        }
         //require_once './helper/sesion.php';
         require_once './Vistas/Principal/layout.php';
     }

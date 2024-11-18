@@ -184,7 +184,7 @@ class RepoDireccion implements RepoCrud
         $consulta->execute();
         
         while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-               $provincia[]= $fila["nombre"];
+               $provincias[]= $fila["nombre"];
         }
         return $provincias;
     }
@@ -202,7 +202,7 @@ class RepoDireccion implements RepoCrud
         $consulta->execute($parametros);
         
         while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-               $provincia[]= $fila["nombreloc"];
+               $localidades[]= $fila["nombreloc"];
         }
         return $localidades;
     }
