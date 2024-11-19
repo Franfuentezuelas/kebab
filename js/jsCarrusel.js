@@ -58,6 +58,7 @@ window.addEventListener("load", function() {
                     contador.textContent = contar;  // Actualiza el texto si el contador es un span
                     console.log(carrito.kebabs);
                     actualizar(carrito.kebabs);
+                    
                 });
 
                 // Aplicamos la imagen de fondo y los ajustes
@@ -84,7 +85,6 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-    if(usuario.innerText!=""){
         fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
@@ -104,5 +104,5 @@ function actualizar(carrito){
         .catch(error => {
             console.error('Error al actualizar el carrito en el servidor:', error);
         });
-    }
+    
 }

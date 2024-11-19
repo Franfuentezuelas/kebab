@@ -143,7 +143,7 @@
             </div>
             
             <!-- Botón de login -->
-            <button type="submit" class="btn-login" id="enviar">Registrarse</button>
+            <button type="button" class="btn-login" id="enviar">Registrarse</button>
 
             <!-- Enlace de registro -->
             <div class="register-link">

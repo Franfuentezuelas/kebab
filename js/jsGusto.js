@@ -313,7 +313,6 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-    if(usuario.innerText!=""){
         fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
@@ -334,5 +333,4 @@ function actualizar(carrito){
             console.error('Error al actualizar el carrito en el servidor:', error);
         });
     }
-}
 

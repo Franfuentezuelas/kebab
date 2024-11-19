@@ -157,6 +157,7 @@ window.addEventListener("load", function() {
                             contador.textContent = contar;  // Actualiza el texto si el contador es un span
                             console.log(carrito.kebabs);
                             
+                            
                         // metes en el carro el kebab de la casa
                         // y cambias el carro agregando el nuevo kebab
                         // cambias el numero de kebab que tiene el carro
@@ -185,7 +186,7 @@ window.addEventListener("load", function() {
                             contador.value = contar;  // Actualiza el valor si el contador es un input
                             contador.textContent = contar;  // Actualiza el texto si el contador es un span
                             console.log(carrito.kebabs);
-
+                            
                         }
 
             
@@ -369,6 +370,7 @@ window.addEventListener("load", function() {
                     contador.value = contar;  // Actualiza el valor si el contador es un input
                     contador.textContent = contar;  // Actualiza el texto si el contador es un span
                     console.log(carrito.kebabs);
+                    actualizar(carrito.kebabs);
                 });
 
                 // Aplicamos la imagen de fondo al producto
@@ -451,7 +453,6 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-    if(usuario.innerText!=""){
         fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
@@ -471,5 +472,5 @@ function actualizar(carrito){
         .catch(error => {
             console.error('Error al actualizar el carrito en el servidor:', error);
         });
-    }
+    
 }
