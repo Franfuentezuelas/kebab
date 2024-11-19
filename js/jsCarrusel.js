@@ -57,6 +57,7 @@ window.addEventListener("load", function() {
                     contador.value = contar;  // Actualiza el valor si el contador es un input
                     contador.textContent = contar;  // Actualiza el texto si el contador es un span
                     console.log(carrito.kebabs);
+                    actualizar(carrito.kebabs);
                 });
 
                 // Aplicamos la imagen de fondo y los ajustes
@@ -76,3 +77,32 @@ window.addEventListener("load", function() {
         })
         .catch(error => console.error("Error fetching kebabs:", error)); // Agrega un manejo de errores
 });
+
+
+
+function actualizar(carrito){
+    const usuario = document.getElementById("user");
+    console.log(usuario.innerText);
+
+    if(usuario.innerText!=""){
+        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/text',
+            },
+            body: JSON.stringify({ carrito: carrito })
+            // Datos que se envían al servidor 
+        })
+        .then(response => response.json())  // Parsear la respuesta JSON
+        .then(data => {
+            // Mostrar el mensaje recibido desde el servidor
+            console.log(data.message);  // Esto mostrará: 'Carrito actualizado correctamente'
+
+            // Mostrar el carrito actualizado
+            console.log(data.carrito); 
+        })
+        .catch(error => {
+            console.error('Error al actualizar el carrito en el servidor:', error);
+        });
+    }
+}

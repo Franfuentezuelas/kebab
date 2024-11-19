@@ -74,6 +74,7 @@ window.addEventListener("load", function() {
             }
 
             alert("Kebab agregado al carrito");
+            actualizar(carrito.kebabs);
             // mando el kebab al carrito directamente
                 // Recargar la página
                 location.reload();
@@ -307,4 +308,31 @@ function actualizarPrecioYAlergenos() {
     });
 }
 
+
+function actualizar(carrito){
+    const usuario = document.getElementById("user");
+    console.log(usuario.innerText);
+
+    if(usuario.innerText!=""){
+        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/text',
+            },
+            body: JSON.stringify({ carrito: carrito })
+            // Datos que se envían al servidor 
+        })
+        .then(response => response.json())  // Parsear la respuesta JSON
+        .then(data => {
+            // Mostrar el mensaje recibido desde el servidor
+            console.log(data.message);  // Esto mostrará: 'Carrito actualizado correctamente'
+
+            // Mostrar el carrito actualizado
+            console.log(data.carrito); 
+        })
+        .catch(error => {
+            console.error('Error al actualizar el carrito en el servidor:', error);
+        });
+    }
+}
 

@@ -2,13 +2,15 @@
 
 class Loguear{
 
-
 /**
  * funcion iniciar sesion
  * @return [void]
  */
 public static function iniciarSesion():void{
-    session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    
 }
 
 /**
@@ -27,8 +29,9 @@ public static function cerrarSesion():void{
  * @return [void]
  */
 public static function login($usuario) : void{
-    iniciarSesion();
-
+    if(!isset($_SESSION)){
+        self::iniciarSesion();
+    }
     $_SESSION['user']=$usuario;
     $_SESSION['usuario']=$usuario->nombre;
 }
@@ -38,7 +41,7 @@ public static function login($usuario) : void{
  */
 public static function logout() : void{
     unset($_SESSION);
-    cerrarSesion();
+    self::cerrarSesion();
 }
 
 /**

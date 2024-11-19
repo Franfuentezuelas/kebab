@@ -26,7 +26,7 @@ RewriteRule ^direccion/(.+) /Api/ApiDireccion.php?var=$1 [L]
 
 # Redirige las solicitudes que vienen de www.mykebab.com/logearse/ a Api/ApiLogin.php
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
-RewriteRule ^usuario /Api/ApiUsuario.php [L]
+RewriteRule ^usuario/(.+) /Api/ApiUsuario.php?var=$1 [L]
 
 
 # Redirige todas las demás solicitudes a index.php

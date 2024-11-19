@@ -1,7 +1,5 @@
 window.addEventListener("load", function() {
-    // Obtén el contenedor del carrito y el contador
-    var carrito = document.getElementById("carrito");
-    var contador = document.getElementById("contador");
+
 
     // Función para alternar la visibilidad de la contraseña
     document.getElementById('togglePassword').addEventListener('click', function (e) {
@@ -22,10 +20,9 @@ window.addEventListener("load", function() {
     const enviar = document.getElementById("enviar");
 
     // Evento que se ejecuta cuando el usuario pulsa el botón "enviar"
-    enviar.addEventListener('submit', function(event) {
+    enviar.addEventListener('click', function () {
         // paramos el evento para evitar que se ejecute el evento del submit
-        console.log(event);
-        event.preventDefault();
+     
       console.log("pulsado enviar");
         var usuario = document.getElementById("usuario");
         var password = document.getElementById("password");
@@ -82,9 +79,15 @@ window.addEventListener("load", function() {
                 // ahora redirijo a la pagina principal
                 //location.href = "http://www.mykebab.com";
 
-                // ahora ejecuto el submit
-                event.submit();
+                // quiero hacer el envio del formulario
 
+                // Ahora obtengo el formulario y lo envío
+                var loginForm = document.getElementById("loginForm");
+                loginForm.submit();
+
+                }else{
+                    error.innerHTML="Error en los datos proporcionados"
+                    loginForm.submit();
                 }
             })
             .catch(error => {

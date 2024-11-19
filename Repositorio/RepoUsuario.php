@@ -1,6 +1,7 @@
 <?php
 
-class RepoUsuario implements RepoCrud
+class RepoUsuario //implements RepoCrud
+
 {
     public static function nuevo($usuario) {
         $con = Conexion::getConection();
@@ -18,7 +19,7 @@ class RepoUsuario implements RepoCrud
             ':pass' => $usuario->pass,
             ':tipo' => $usuario->tipo->value,
             ':correo' => $usuario->correo,
-            ':carrito' => json_encode($usuario->carrito), // Asegúrate de que sea un JSON
+            ':carrito' => $usuario->carrito, // Asegúrate de que sea un JSON
             ':saldo' => $usuario->saldo
         ];
 
@@ -57,7 +58,7 @@ class RepoUsuario implements RepoCrud
                 $fila["pass"],
                 Tipo::from($fila["tipo"]), // Convertir tipo a enum
                 $fila["correo"],
-                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["carrito"], // Decodificar carrito
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
                 RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
@@ -87,7 +88,7 @@ class RepoUsuario implements RepoCrud
                 $fila["pass"],
                 Tipo::from($fila["tipo"]), // Convertir tipo a enum
                 $fila["correo"],
-                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["carrito"], // Decodificar carrito
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
                 RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
@@ -96,13 +97,13 @@ class RepoUsuario implements RepoCrud
         return $usuario;
     }
 
-    public static function login($usuario, $password) {
+    public static function login($usuario, $pass) {
         $con = Conexion::getConection();
-        $sql = "SELECT * FROM Usuario WHERE usurio like upper(:usuario) and pass like upper(:password)";
+        $sql = "SELECT * FROM Usuario WHERE usuario like upper(:usuario) and pass like upper(:pass)";
         
         $consulta = $con->prepare($sql);
         $parametros = [':usuario' => $usuario,
-                        ':password' => $password];
+                    ':pass' => $pass];
         
         $consulta->execute($parametros);
         $usuario = null;
@@ -118,7 +119,7 @@ class RepoUsuario implements RepoCrud
                 $fila["pass"],
                 Tipo::from($fila["tipo"]), // Convertir tipo a enum
                 $fila["correo"],
-                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["carrito"], // Decodificar carrito
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
                 RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
@@ -151,7 +152,7 @@ class RepoUsuario implements RepoCrud
                 $fila["pass"],
                 Tipo::from($fila["tipo"]), // Convertir tipo a enum
                 $fila["correo"],
-                json_decode($fila["carrito"], true), // Decodificar carrito
+                $fila["carrito"], // Decodificar carrito
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
                 RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
@@ -178,7 +179,7 @@ class RepoUsuario implements RepoCrud
             ':pass' => $usuario->pass,
             ':tipo' => $usuario->tipo->value,
             ':correo' => $usuario->correo,
-            ':carrito' => json_encode($usuario->carrito),
+            ':carrito' => $usuario->carrito,
             ':saldo' => $usuario->saldo
         ];
         // el metodo update devuelve el usuario ya modificado o null si no se puede realizar la modificacion
@@ -214,12 +215,11 @@ class RepoUsuario implements RepoCrud
                 $fila["pass"],
                 Tipo::from($fila["tipo"]),
                 $fila["correo"],
-                json_decode($fila["carrito"], true),
+                $fila["carrito"],
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]) // Cargar direcciones del usuario
             );
         }
-        
         return $usuarios;
     }
 }

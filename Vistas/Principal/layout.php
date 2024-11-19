@@ -1,4 +1,5 @@
 <?php
+Loguear::iniciarSesion();
     // quiero ortener la url que esta llamando a index.php con el parametro var
     if(!isset($_GET['var'])){
         $var="inicio";

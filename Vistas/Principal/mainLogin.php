@@ -1,16 +1,16 @@
 <main class="container my-4">
     <section class="productos text-center">
-        <form class="login-form" action="http://www.mykebab.com" method="post">
+        <form class="login-form" id="loginForm" action="/login" method="post">
             <h2>Iniciar sesión</h2>
 
             <!-- Campo de usuario -->
             <div class="input-group" title="El usuario debe tener entre 4 y 15 caracteres, y solo puede contener letras y números.">
                 <div class="label">
-                    <label for="username" >Usuario</label>
+                    <label for="usuario" >Usuario</label>
                     <span class="error" id="errorusuario"> </span> <!-- Mensaje de error -->
                 </div>
                 <div class="login">
-                    <input type="text" id="usuario" name="username" placeholder="AntonioMagic">
+                    <input type="text" id="usuario" name="usuario" placeholder="AntonioMagic">
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
             </div>
 
             <!-- Botón de login -->
-            <button type="submit" class="btn-login" id="enviar">Iniciar sesión</button>
+            <button type="button" class="btn-login" id="enviar">Iniciar sesión</button>
 
             <!-- Enlace de registro -->
             <div class="register-link">
