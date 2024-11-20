@@ -87,7 +87,6 @@ window.addEventListener("load", function() {
 
                 }else{
                     error.innerHTML="Error en los datos proporcionados"
-                    loginForm.submit();
                 }
             })
             .catch(error => {

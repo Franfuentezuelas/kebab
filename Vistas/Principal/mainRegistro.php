@@ -1,6 +1,6 @@
 <main class="container my-4">
     <section class="productos text-center">
-        <form class="login-form" action="#" method="post">
+        <form class="login-form" id="registroForm" action="/registrarse" method="post">
             <h2>Registrarse</h2>
 
             <!-- Campo de nombre -->
@@ -53,7 +53,7 @@
                     <span class="error" id="errorusuario"> </span> <!-- Mensaje de error -->
                 </div>
                 <div class="login">
-                    <input type="text" id="usuario" name="username" placeholder="AntonioMagic">
+                    <input type="text" id="usuario" name="usuario" placeholder="AntonioMagic">
                 </div>
             </div>
 

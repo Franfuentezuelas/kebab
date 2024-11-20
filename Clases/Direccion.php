@@ -13,7 +13,7 @@ final class Direccion implements ToJSON {
         string $puntoGPS = null,
         string $localidad_nombreloc,
         string $localidad_nombreprov,
-        int $usuario_id
+        int $usuario_id=null
     ) {
         $this->id = $id;
         $this->via = $via;

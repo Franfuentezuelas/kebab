@@ -90,6 +90,18 @@ provincia.addEventListener('change', function() {
     // y cumplem los patrones de validacion se enviara el formulario
     // antes se comprobara si el usuario ya esta registrado y si es asi se informara al usuario
     enviar.addEventListener('click', function() {
+        var correcto=validar();
+        console.log(correcto);
+        if(correcto){
+            var registroForm = document.getElementById("registroForm");
+            console.log(registroForm);
+            registroForm.submit();
+        }
+        
+    });
+});
+    function validar(){
+        var valido=true;
         // Limpiar mensajes de error previos
         var camposError = document.querySelectorAll('.error');
         camposError.forEach(function(error) {
@@ -241,10 +253,8 @@ provincia.addEventListener('change', function() {
                 console.error('Error:', error);            
             })
         }
-        if (valido) {
-            alert("Registro exitoso");
-        }
-    });  
+      return valido;
+    }  
         
-});
+
     

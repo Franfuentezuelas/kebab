@@ -15,7 +15,7 @@ class Usuario implements ToJSON {
         Tipo $tipo = Tipo::USUARIO, 
         string $correo, 
         string $carrito= null, 
-        float $saldo = 0.0,
+        float $saldo = 0,
         array $direcciones = null,
         array $alergenos = null,
         //array $pedidos = null

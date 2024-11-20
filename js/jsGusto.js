@@ -53,8 +53,20 @@ window.addEventListener("load", function() {
                 kebab.kebab_id= kebab.id;
                 kebab.id= null;
                 kebab.nombre=kebab.nombre+" personalizado";
-                kebab.ingredientes=seleccionados;
-                kebab.precio=precio;
+                kebab.ingredientes=[];
+                var preciosIngredientes=[];
+                seleccionados.forEach(function(select){
+                    kebab.ingredientes.push(select.ingrediente);
+                    preciosIngredientes.push(select.ingrediente.precio);
+                });
+                kebab.ingredientes.sort((a, b) => a.id-b.id);
+                preciosIngredientes.sort((a, b) => a - b);
+                preciosIngredientes=preciosIngredientes.slice(3);
+                var precioTotal=precio.value;
+                preciosIngredientes.forEach(function(precio){
+                    precioTotal+=precio;
+                });
+                kebab.nuevoPrecio=precioTotal;
                 console.log(kebab);
                 // mandamos el kebab al carrito
                 // Obtén el contenedor del carrito y el contador
@@ -183,6 +195,7 @@ window.addEventListener("load", function() {
                     if (ingrediente.parentElement.id != "personalizado") {
                         personalizado.appendChild(ingrediente);
                         actualizarPrecioYAlergenos();
+                        kebab.nuevoPrecio=precio.nuevoPrecio;
                     }
                 });
 
@@ -203,6 +216,7 @@ window.addEventListener("load", function() {
                     if (ingrediente.parentElement.id != "ingredientes") {
                         ingredientes.appendChild(ingrediente);
                         actualizarPrecioYAlergenos();
+                        kebab.nuevoPrecio=precio.nuevoPrecio;
                     }
                 });
 
@@ -221,6 +235,7 @@ window.addEventListener("load", function() {
                         ingredientes.appendChild(elementoIngrediente);
                     }
                     actualizarPrecioYAlergenos();
+                   
                 });
                 // Añadimos el item al carrusel
                 personalizar.appendChild(elementoIngrediente);
@@ -229,7 +244,6 @@ window.addEventListener("load", function() {
         .catch(error => console.error("Error fetching kebabs:", error)); // Manejo de errores
     
 });
-
 
 // Función que actualiza el precio y los alergenos
 function actualizarPrecioYAlergenos() {
@@ -286,26 +300,18 @@ function actualizarPrecioYAlergenos() {
     coste = coste + parseFloat(precioBase.value);  // Añadimos el precio base del kebab
 
     // Redondeamos el precio final a dos decimales
+    
+    // var kebab= document.getElementById("imagen").kebab;
+    // kebab.nuevoPrecio = coste;
+    precioBase.nuevoPrecio = coste;
     coste = coste.toFixed(2);
-
     // Actualizamos el precio mostrado en la página
     precioBase.innerHTML = `${coste}€`;
 
     // Incluir los alergenos para que se vean
     // Aquí iría el código para agregar alergenos al ingrediente desde su inicio
 
-    ingrediente.alergenos.forEach(alergeno => {
-        const elementoAlergeno = document.getElementById(alergeno.nombre);
-        if (!elementoAlergeno) {
-            const elementoAlergeno = document.createElement("img");
-            elementoAlergeno.id = alergeno.nombre;
-            elementoAlergeno.alt = alergeno.nombre;
-            elementoAlergeno.title = alergeno.nombre;
-            elementoAlergeno.src = `./imagenes/${alergeno.foto}/50`;
-
-            alergenos.appendChild(elementoAlergeno);
-        }
-    });
+   
 }
 
 

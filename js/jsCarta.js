@@ -3,7 +3,7 @@ window.addEventListener("load", function() {
     // Obtén el contenedor del carrito y el contador
     var carrito = document.getElementById("carrito");
     var contador = document.getElementById("contador");
-
+    
     // Hacer la solicitud a la API para obtener los kebabs
     fetch("http://www.mykebab.com/aplicacion/kebabs")
         .then(response => response.json())
@@ -109,6 +109,14 @@ window.addEventListener("load", function() {
                         var kebab = JSON.parse(JSON.stringify(guardado));
                         // obtengo los ingredientes seleccionados
                         var seleccionados = Array.from(document.getElementById("ingredientes").children);
+
+                        var eleccion = Array.from(document.getElementById("ingredientes").children);
+                        var seleccionados=[];
+                        eleccion.forEach(function(seleccionado){
+                            seleccionados.push(seleccionado.ingrediente);
+                        });
+
+
                         // obtengo el precio que se ha calculado
                         // si tiene los mismos compramos el kebab directamente
                         // si no modificamos el kebab pasando el id a kebab_id
@@ -125,11 +133,14 @@ window.addEventListener("load", function() {
                         console.log(kebab.ingredientes.length);
                         console.log(seleccionados.length);
                         if (kebab.ingredientes.length == seleccionados.length) {
+                            console.log(kebab.ingredientes);
+                            console.log(seleccionados);
+                            kebab.ingredientes=kebab.ingredientes.sort((a, b) => a.id-b.id);
+                            seleccionados=seleccionados.sort((a, b) => a.id-b.id);
                             
                             for (let i = 0; i < kebab.ingredientes.length; i++) {
-                                console.log(kebab.ingredientes[i].id);
-                                console.log(seleccionados[i].ingrediente.id);
-                                if (kebab.ingredientes[i].id != seleccionados[i].ingrediente.id) {
+
+                                if (kebab.ingredientes[i].id != seleccionados[i].id) {
                                     if(mismoKebab){
                                         mismoKebab = false;
                                     }
@@ -169,13 +180,16 @@ window.addEventListener("load", function() {
                             kebab.kebab_id= kebab.id;
                             kebab.id= null;
                             kebab.nombre=kebab.nombre+" personalizado";
+                            kebab.ingredientes="";
                             kebab.ingredientes=seleccionados;
-                            kebab.precio=precio;
+                            console.log(kebab.ingredientes);
+                            kebab.precio=precio.value;
                             console.log(kebab);
                             // mandamos el kebab al carrito
                             // Obtén el contenedor del carrito y el contador
                             var carrito = document.getElementById("carrito");
                             var contador = document.getElementById("contador");
+                            console.log(carrito.kebabs);
                             carrito.kebabs.push(kebab);
 
                             // Guardar el carrito actualizado en localStorage
@@ -208,7 +222,7 @@ window.addEventListener("load", function() {
                                     
                                 });
                     
-                            alert("Comprar");
+
                             actualizar(carrito.kebabs);
                             
                             }
@@ -268,6 +282,7 @@ window.addEventListener("load", function() {
                 if (ingrediente.parentElement.id != "personalizado") {
                     personalizado.appendChild(ingrediente);
                     actualizarPrecioYAlergenos();
+                    kebab.nuevoPrecio=precio.nuevoPrecio;
                 }
             });
 
@@ -282,6 +297,7 @@ window.addEventListener("load", function() {
                 if (ingrediente.parentElement.id != "ingredientes") {
                     ingredientes.appendChild(ingrediente);
                     actualizarPrecioYAlergenos();
+                    kebab.nuevoPrecio=precio.nuevoPrecio;
                 }
             });
 
@@ -300,6 +316,7 @@ window.addEventListener("load", function() {
                     ingredientes.appendChild(elementoIngrediente);
                 }
                 actualizarPrecioYAlergenos();
+                kebab.nuevoPrecio=precio.nuevoPrecio;
             });
             // Añadimos el item al carrusel
             personalizar.appendChild(elementoIngrediente);
@@ -353,12 +370,15 @@ window.addEventListener("load", function() {
                 document.getElementById("ingredientes").appendChild(ingredienteCambio);
             // Añadimos el item
             ingredientes.appendChild(ingredienteCambio);
+
         });
         actualizarPrecioYAlergenos();
+        kebab.nuevoPrecio=precio.nuevoPrecio;
                 });
 
                 // Al hacer clic en el botón "comprar"
                 botonComprar.addEventListener('click', function() {
+                    
                     // Añadir el kebab al carrito (elementoCarrusel.kebab hace referencia al objeto kebab)
                     carrito.kebabs.push(elementoCarta.kebab);
                     
@@ -370,6 +390,7 @@ window.addEventListener("load", function() {
                     contador.value = contar;  // Actualiza el valor si el contador es un input
                     contador.textContent = contar;  // Actualiza el texto si el contador es un span
                     console.log(carrito.kebabs);
+
                     actualizar(carrito.kebabs);
                 });
 
@@ -439,10 +460,16 @@ function actualizarPrecioYAlergenos() {
     coste = coste + parseFloat(precioBase.value);  // Añadimos el precio base del kebab
 
     // Redondeamos el precio final a dos decimales
-    coste = coste.toFixed(2);
+   
 
+    // var kebab= document.getElementById("imagen").kebab;
+    // kebab.nuevoPrecio = coste;
+    precioBase.nuevoPrecio = coste;
+    coste = coste.toFixed(2);
     // Actualizamos el precio mostrado en la página
     precioBase.innerHTML = `${coste}€`;
+
+    
 
 }
 

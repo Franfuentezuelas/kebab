@@ -19,6 +19,7 @@ window.addEventListener("load", function() {
                 // Creamos un elemento de carrusel con el contenido del kebab
                 const elementoCarrusel = document.createElement("div");
                 elementoCarrusel.classList.add("carousel-item");
+                console.log(kebab);
                 elementoCarrusel.kebab = kebab;  // Asignamos el objeto kebab al elemento Carrusel
                 
                 elementoCarrusel.innerHTML = `
@@ -37,7 +38,7 @@ window.addEventListener("load", function() {
                 const elementoProducto = elementoCarrusel.querySelector('.producto');
                 //const personalizar = elementoProducto.querySelector('.personalizar');
                 const botonComprar = elementoProducto.querySelector('.botonComprar');
-                
+                botonComprar.kebab=kebab;
                 // Agregar evento para el botón "personalizar" (solo un ejemplo)
                 // personalizar.addEventListener('click', function() {
                 //     alert("personalizar");
@@ -47,7 +48,8 @@ window.addEventListener("load", function() {
                 // Al hacer clic en el botón "comprar"
                 botonComprar.addEventListener('click', function() {
                     // Añadir el kebab al carrito (elementoCarrusel.kebab hace referencia al objeto kebab)
-                    carrito.kebabs.push(elementoCarrusel.kebab);
+                    
+                    carrito.kebabs.push(this.kebab);
                     
                     // Guardar el carrito actualizado en localStorage
                     localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
