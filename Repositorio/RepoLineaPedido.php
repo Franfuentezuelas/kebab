@@ -3,11 +3,10 @@
 class RepoLineaPedido {
     public static function nuevo(LineaPedido $lineaPedido) {
         $con = Conexion::getConection();
-        $linea = null;
     
         // Consulta de inserción para la tabla LineaPedido
-        $sql = "INSERT INTO PEDIDO_KEBAB (kebab_id, pedido_id, nombre_kebab, cantidad, precio, total, kebab_json) 
-                VALUES (:kebab_id, :pedido_id, :nombre_kebab, :cantidad, :precio, :total, :kebab_json)";
+        $sql = "INSERT INTO PEDIDO_KEBAB (kebab_id, pedido_id, nombre_kebab, cantidad, precio, kebabJSON) 
+                VALUES (:kebab_id, :pedido_id, :nombre_kebab, :cantidad, :precio, :kebabjson)";
         
         $consulta = $con->prepare($sql);
         
@@ -18,26 +17,25 @@ class RepoLineaPedido {
             ':nombre_kebab' => $lineaPedido->nombre_kebab,
             ':cantidad' => $lineaPedido->cantidad,
             ':precio' => $lineaPedido->precio,
-            ':total' => $lineaPedido->total,
-            ':kebab_json' => $lineaPedido->kebab_json
+            ':kebabjson' => $lineaPedido->kebab_json
         ];
     
         // Ejecutar la consulta e insertar la línea de pedido
         if ($consulta->execute($parametros)) {
-            $linea = $con->lastInsertId(); // Devuelve el ID de la línea de pedido recién creada
+            $lineaPedido->linea = $con->lastInsertId(); // Devuelve el ID de la línea de pedido recién creada
     
             // Obtener el pedido correspondiente al id
-            $pedido = RepoPedido::findByID($lineaPedido->pedido_id);
-            if ($pedido) {
+           // $pedido = RepoPedido::findByID($lineaPedido->pedido_id);
+           // if ($pedido) {
                 // Sumar el total de la nueva línea de pedido al importe existente
-                $nuevoImporte = $pedido->importe + $lineaPedido->total;
+                // $nuevoImporte = $pedido->importe + $lineaPedido->total;
     
                 // Actualizar el importe del pedido
-                RepoPedido::updatePrecio($pedido, $nuevoImporte);
-            }
+                //RepoPedido::updatePrecio($pedido, $nuevoImporte);
+           // }
         }
     
-        return $linea; // La línea o null si no se pudo guardar
+        return $lineaPedido; // La línea o null si no se pudo guardar
     }
     
     

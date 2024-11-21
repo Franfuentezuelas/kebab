@@ -9,7 +9,7 @@ class Kebab implements ToJSON {
         int $id = null, // ID del kebab
         string $nombre, // Nombre del kebab
         string $foto = null, // Imagen del kebab, opcional
-        float $precio = 0, // Precio del kebab
+        float $precio, // Precio del kebab
         string $descripcion, // Descripción del kebab
         array $ingredientes = null, // Array de ingredientes del kebab
         string $kebab_id = null // Kebab base, por defecto null
@@ -51,7 +51,7 @@ class Kebab implements ToJSON {
             'precio' => $this->precio,
             'descripcion' => $this->descripcion,
             'ingredientes' => $this->ingredientes, // Agregamos el array de ingredientes
-            'kebab_base' => $this->kebab_ida
+            'kebab_base' => $this->kebab_id
         ];
 
         // Convertir el array a JSON y retornarlo

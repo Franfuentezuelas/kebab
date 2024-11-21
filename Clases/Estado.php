@@ -1,5 +1,5 @@
 <?php
-namespace Clases;
+
 
 enum Estado: string {
     case RECIBIDO = 'RECIBIDO';

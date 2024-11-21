@@ -17,6 +17,15 @@ Loguear::iniciarSesion();
 if(isset($_GET['var']) && loguear::estaLogado()){
     
 switch ($_GET['var']) {
+    case 'logout':
+        // Respuesta exitosa para obtener la lista de kebabs
+        http_response_code(200);
+        // devuelvo en nombre del usuario si tiene la sesion iniciada
+        unset($_SESSION['enviado']);
+        Loguear::cerrarSesion();
+        
+        echo "deslogueado";
+        break;
     case 'nombre':
         // Respuesta exitosa para obtener la lista de kebabs
         http_response_code(200);

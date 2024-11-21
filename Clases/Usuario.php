@@ -1,6 +1,6 @@
 <?php
 
-class Usuario implements ToJSON {
+class Usuario  { //implements ToJSON
     /**
      * Clase Usuario
      */
@@ -35,38 +35,38 @@ class Usuario implements ToJSON {
         //$this->pedidos = $pedidos; // Asignación del array de pedidos
     }
 
-    /**
-     * Metodo implementado de la interfaz ToJSON
-     * @return string JSON con el objeto
-     */
-    public function toJSON() : string {
-        // Crear un array con los atributos del usuario
-        $datosUsuario = [
-            'id' => $this->id,
-            'nombre' => $this->nombre,
-            'apellidos' => $this->apellidos,
-            'telefono' => $this->telefono,
-            'usuario' => $this->usuario,
-            'pass' => $this->pass,
-            'tipo' => $this->tipo->value, // Acceso al valor del enum Tipo
-            'correo' => $this->correo,
-            'carrito' => json_decode($this->carrito, true), // Decodifica si $carrito es una cadena JSON
-            'saldo' => $this->saldo,
-            'direcciones' => $this->direcciones, // Agregamos el array de direcciones
-            'alergenos' => $this->alergenos // Agregamos el array de alérgenos
-        ];
+    // /**
+    //  * Metodo implementado de la interfaz ToJSON
+    //  * @return string JSON con el objeto
+    //  */
+    // public function toJSON() : string {
+    //     // Crear un array con los atributos del usuario
+    //     $datosUsuario = [
+    //         'id' => $this->id,
+    //         'nombre' => $this->nombre,
+    //         'apellidos' => $this->apellidos,
+    //         'telefono' => $this->telefono,
+    //         'usuario' => $this->usuario,
+    //         'pass' => $this->pass,
+    //         'tipo' => $this->tipo->value, // Acceso al valor del enum Tipo
+    //         'correo' => $this->correo,
+    //         'carrito' => json_decode($this->carrito, true), // Decodifica si $carrito es una cadena JSON
+    //         'saldo' => $this->saldo,
+    //         'direcciones' => $this->direcciones, // Agregamos el array de direcciones
+    //         'alergenos' => $this->alergenos // Agregamos el array de alérgenos
+    //     ];
 
-        // Convertir el array a JSON y retornarlo
-        return json_encode($datosUsuario, JSON_PRETTY_PRINT);
-    }
+    //     // Convertir el array a JSON y retornarlo
+    //     return json_encode($datosUsuario, JSON_PRETTY_PRINT);
+    // }
 
-    /**
-     * Metodo que devuelve un string con el nombre completo del usuario
-     * @return string con el nombre completo
-     */
-    public function toStrin() : string {
-        // String con el nombre completo
-        return trim($this->nombre . ' ' . $this->apellidos); // Usamos trim para eliminar espacios extra por ejemplo si no hay apellidos
-    }
+    // /**
+    //  * Metodo que devuelve un string con el nombre completo del usuario
+    //  * @return string con el nombre completo
+    //  */
+    // public function toStrin() : string {
+    //     // String con el nombre completo
+    //     return trim($this->nombre . ' ' . $this->apellidos); // Usamos trim para eliminar espacios extra por ejemplo si no hay apellidos
+    // }
 }
 

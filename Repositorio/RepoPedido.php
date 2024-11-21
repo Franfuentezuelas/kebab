@@ -2,29 +2,26 @@
 
 class RepoPedido
 {
-    public static function nuevo(Pedido $pedido): Pedido {
+    public static function nuevo(Pedido $pedido) {
         $con = Conexion::getConection();
-        
-        // Si no se proporciona la fecha, se usa la fecha actual
-        $fecha = $pedido->getFecha() ?? new DateTime();
 
         // Preparar la consulta SQL para insertar un nuevo pedido
-        $sql = "INSERT INTO pedido (importe, usuario_id, fecha, direccion) 
-                VALUES (:importe, :usuario_id, :fecha, :direccion)";
+        $sql = "INSERT INTO pedido (importe, usuario_id, direccion)
+                VALUES (:importe, :usuario_id, :direccion)";
         
         $consulta = $con->prepare($sql);
         
         // Establecer los parámetros de la consulta
         $parametros = [
-            ':importe' => $pedido->getImporte(),
-            ':usuario_id' => $pedido->getUsuarioId(),
-            ':fecha' => $fecha->format('Y-m-d H:i:s'), // Formato adecuado para la base de datos
-            ':direccion' => json_encode($pedido->getDireccion()) // Convertir a JSON si es necesario
+            ':importe' => $pedido->importe,
+            ':usuario_id' => $pedido->usuario_id,
+            ':direccion' => $pedido->direccion // Convertir a JSON si es necesario
+        
         ];
 
         // Ejecutar la consulta
         if ($consulta->execute($parametros)) {
-            $pedido->setId($con->lastInsertId()); // Asignar el ID autogenerado al objeto Pedido
+            $pedido->id=$con->lastInsertId(); // Asignar el ID autogenerado al objeto Pedido
         } else {
             // Manejar el error según sea necesario
             $pedido = null;
@@ -33,7 +30,7 @@ class RepoPedido
         return $pedido;
     }
 
-    public static function findByID(int $id): ?Pedido {
+    public static function findByID(int $id) {
         $con = Conexion::getConection();
         $sql = "SELECT * FROM pedido WHERE id = :id";
         
@@ -58,7 +55,7 @@ class RepoPedido
         return $pedido;
     }
 
-    public static function getAll(): array {
+    public static function getAll() {
         $con = Conexion::getConection();
         $pedidos = [];
         
@@ -82,7 +79,7 @@ class RepoPedido
         return $pedidos;
     }
 
-    public static function getByUsuarioId($usuario_id): array {
+    public static function getByUsuarioId($usuario_id) {
         $con = Conexion::getConection();
         $pedidos = [];
         
@@ -106,7 +103,7 @@ class RepoPedido
         return $pedidos;
     }
     
-    public static function updateEstado(Pedido $pedido, Estado $nuevoEstado): bool {
+    public static function updateEstado(Pedido $pedido, Estado $nuevoEstado) {
         $con = Conexion::getConection();
         
         $sql = "UPDATE pedido SET estado = :estado WHERE id = :id";
@@ -120,7 +117,7 @@ class RepoPedido
         return $consulta->execute($parametros);
     }
 
-    public static function updatePrecio(Pedido $pedido, float $nuevoPrecio): bool {
+    public static function updatePrecio(Pedido $pedido, float $nuevoPrecio) {
         $con = Conexion::getConection();
         
         $sql = "UPDATE pedido SET importe = :importe WHERE id = :id";

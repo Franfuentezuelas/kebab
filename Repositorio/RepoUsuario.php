@@ -6,7 +6,7 @@ class RepoUsuario //implements RepoCrud
     public static function nuevo($usuario) {
         $con = Conexion::getConection();
         
-        $sql = "INSERT INTO Usuario (nombre, apellidos, telefono, usuario, pass, tipo, correo, carrito, saldo) 
+        $sql = "INSERT INTO usuario (nombre, apellidos, telefono, usuario, pass, tipo, correo, carrito, saldo) 
                 VALUES (:nombre, :apellidos, :telefono, :usuario, :pass, :tipo, :correo, :carrito, :saldo)";
         
         $consulta = $con->prepare($sql);
@@ -38,17 +38,20 @@ class RepoUsuario //implements RepoCrud
     }
     
     public static function findByID($id) {
+       
         $con = Conexion::getConection();
-        $sql = "SELECT * FROM Usuario WHERE id = :id";
-        
+        $sql = "SELECT * FROM usuario WHERE id = :id";
+        $usuario=null;
         $consulta = $con->prepare($sql);
         $parametros = [':id' => $id];
         
         $consulta->execute($parametros);
-        $usuario = null;
-        $fila = $consulta->fetch(PDO::FETCH_ASSOC);
         
+        $fila = $consulta->fetch(PDO::FETCH_ASSOC);
+     
         if ($fila) {
+           
+            // Crear el objeto Usuario con los datos recuperados de la base de datos
             $usuario = new Usuario(
                 $fila["id"],
                 $fila["nombre"],
@@ -56,16 +59,21 @@ class RepoUsuario //implements RepoCrud
                 $fila["telefono"],
                 $fila["usuario"],
                 $fila["pass"],
-                Tipo::from($fila["tipo"]), // Convertir tipo a enum
+                Tipo::from($fila["tipo"]), // tengo que hacer que sea un enum Tipo
                 $fila["correo"],
-                $fila["carrito"], // Decodificar carrito
+                $fila["carrito"],
                 $fila["saldo"],
-                RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
-                RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
+                RepoDireccion::findByUsuarioId($fila["id"]), // Recuperar direcciones del usuario
+                RepoAlergenos::alergenosPorUsuario($fila["id"]) // Recuperar pedidos del usuario
+                
             );
+          
         }
+
         return $usuario;
     }
+    
+    
 
     public static function findByUser($usuario) {
         $con = Conexion::getConection();
@@ -122,7 +130,7 @@ class RepoUsuario //implements RepoCrud
                 $fila["carrito"], // Decodificar carrito
                 $fila["saldo"],
                 RepoDireccion::findByUsuarioId($fila["id"]), // Cargar direcciones del usuario
-                RepoPedido::getByUsuarioId($fila["id"]) // Cargar pedidos del usuario
+                
             );
         }
         return $usuario;
@@ -185,6 +193,27 @@ class RepoUsuario //implements RepoCrud
         // el metodo update devuelve el usuario ya modificado o null si no se puede realizar la modificacion
         return $consulta->execute($parametros) ? $usuario : null;
     }
+
+public static function updateCarro($id) {
+    // Obtener la conexión a la base de datos
+    $con = Conexion::getConection();
+
+    // Consulta SQL con parámetro preparado
+    $sql = "UPDATE Usuario SET carrito = null WHERE id = :id";
+
+    // Preparar la consulta
+    $consulta = $con->prepare($sql);
+    
+    // Asignar el valor del parámetro
+    $parametros = [':id' => $id];
+
+    // Ejecutar la consulta
+    $consulta->execute($parametros);
+
+    // Comprobar si alguna fila fue afectada
+    return $consulta->rowCount() > 0;
+}
+    
 
     public static function delete($usuario) {
         $con = Conexion::getConection();

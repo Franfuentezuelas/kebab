@@ -50,7 +50,7 @@ final class Direccion implements ToJSON {
      * Metodo que devuelve un string con la dirección del usuario
      * @return string con la dirección completa
      */
-    public function toStrin() : string {
+    public function toString() : string {
         // Comenzamos con la dirección básica
         $direccion = trim($this->via . ' ' . $this->numero);
         

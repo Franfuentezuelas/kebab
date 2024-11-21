@@ -3,12 +3,14 @@
 class LineaPedido implements ToJSON {
 
     public function __construct(
-        int $linea = null,
+        ?int $linea = null,
         int $kebab_id,
         int $pedido_id,
         string $nombre_kebab,
         int $cantidad,
-        float $precio
+        float $precio,
+        float $total,
+        Kebab $kebab
     ) {
         $this->linea = $linea;
         $this->kebab_id = $kebab_id;
@@ -18,8 +20,8 @@ class LineaPedido implements ToJSON {
         $this->precio = $precio;
         $this->total = $this->precio * $this->cantidad;
         
-        // Obtener el objeto Kebab por ID y almacenarlo como JSON
-        $kebab = RepoKebab::findByID($this->kebab_id);
+        // // Obtener el objeto Kebab por ID y almacenarlo como JSON
+        // $kebab = RepoKebab::findByID($this->kebab_id);
         $this->kebab_json = $kebab ? $kebab->toJSON() : '{}'; // Asignar JSON vacío si no existe
     }
 

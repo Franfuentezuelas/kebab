@@ -483,7 +483,7 @@ carrito.kebabs.forEach(function (kebab) {
             });
             confirmationBox.appendChild(cancelButton);
         
-            // Crear botón de "Cerrar Sesión"
+            // Crear botón de "realizar compra"
             const comparBoton = document.createElement("button");
             comparBoton.textContent = "Realizar compra";
             comparBoton.style.margin = "10px";
@@ -493,13 +493,75 @@ carrito.kebabs.forEach(function (kebab) {
             comparBoton.style.border = "none";
             comparBoton.style.borderRadius = "4px";
             comparBoton.style.cursor = "pointer";
+
+            // Evento de click para el botón de "realizar compra"
             comparBoton.addEventListener("click", function () {
 
-                // Borrar el carrito del local storage
-                localStorage.removeItem("carrito");
+                // Tengo que decirle al servidor que quiero realizar la compra
+                // y que el carrito queda vacío
+
+                fetch('http://www.mykebab.com/realizarcompra')
+                    .then(response => response.text())
+                    .then(data => {
+                        
+                        console.log(data);
+                
+                        if (data == "ok") {
+                            // Mostrar mensaje de compra
+                            const message = document.createElement("p");
+                            message.textContent = "¡Compra realizada con éxito!";
+                            confirmationBox.appendChild(message);
+                
+                            // Estilizar el mensaje
+                            message.style.margin = "10px";
+                            message.style.padding = "10px 20px";
+                            message.style.backgroundColor = "#4CAF50";
+                            message.style.color = "#fff";
+                            message.style.border = "none";
+                            message.style.borderRadius = "4px";
+                            message.style.cursor = "pointer";
+                            message.style.zIndex = "2000";
+                
+                            // Mostrar el mensaje de compra
+                            console.log("Esperando...");
+                            // borro el carrito
+                            localStorage.removeItem("carrito");
+                            // actualizo el servidor con el carrito vacio
+                            actualizarCarritoServidor(carrito);
+                            // actualizo el contador del carrito
+                            actualizarContador(carrito);
+                
+                            // Pausar durante 3 segundos (3000 milisegundos) antes de continuar
+                            setTimeout(function() {
+                                // Aquí el código continúa después de la pausa
+                                console.log("¡Tiempo terminado!");
+                                carrito.kebabs = [];
+                                // borro el carrito
+                                localStorage.removeItem("carrito");
+                                // Quitar el translucido al tramitar la compra
+                                document.body.removeChild(translucido);
+                                // actualizo el servidor con el carrito vacio
+                                actualizarCarritoServidor(carrito);
+                                // actualizo el contador del carrito
+                                actualizarContador(carrito);
+
+                            }, 2000); // 3000 milisegundos = 3 segundos
+
+                        } else {
+                            alert("Error al realizar la compra");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error en la solicitud:", error);
+                    });
+                
+
+
+                // // Borrar el carrito del local storage
+                // localStorage.removeItem("carrito");
         
-                // Redirigir al logout
-                location.href = "carta";
+                // // Redirigir al logout
+                // location.href = "carta";
             });
             confirmationBox.appendChild(comparBoton);
         
@@ -624,9 +686,18 @@ carrito.kebabs.forEach(function (kebab) {
                         logoutButton.addEventListener("click", function () {
                             // Borrar el carrito del local storage
                             localStorage.removeItem("carrito");
-                    
-                            // Redirigir al logout
-                            location.href = "logout";
+                           fetch('http://www.mykebab.com/usuario/logout')
+                            .then(response => response.text())
+                            .then(data => {
+                                console.log(data);                                
+                            })
+                            .catch(error => {
+                                console.error("Error al actualizar el carrito:", error);
+                            });
+                          
+                                location.href = "carta";
+                        
+
                         });
                         confirmationBox.appendChild(logoutButton);
                     
@@ -667,7 +738,7 @@ carrito.kebabs.forEach(function (kebab) {
 
                     // Actualizar carrito al cargar la página
 
-                    actualizarCarrito(carrito.kebabs);
+                    actualizarCarrito(carrito);
                 }
         
             })
@@ -781,12 +852,13 @@ async function actualizarCarrito(carro) {
             // Actualizamos el carrito con el del servidor
             data.forEach(kebab => {
                 if (Object.keys(kebab).length > 0 && kebab.nombre !== "") {
-                    carrito.push(kebab);
+                    carrito.kebabs.push(kebab);
                 }
             });
 
             // Actualizamos el contador del carrito
             actualizarContador(carrito);
+            actualizarCarritoServidor(carrito);
 
             // Guardamos el carrito actualizado en localStorage
             localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -809,7 +881,7 @@ async function actualizarCarrito(carro) {
             // Sumamos los carritos (servidor + local)
             data.forEach(kebab => {
                 if (Object.keys(kebab).length > 0 && kebab.nombre !== "") {
-                    carrito.push(kebab);
+                    carrito.kebabs.push(kebab);
                 }
                        // Enviar el carrito actualizado al servidor
             actualizarCarritoServidor(carrito);
@@ -845,7 +917,7 @@ async function actualizarCarritoServidor(carrito) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ carrito: carrito }) // Datos que se envían al servidor
+            body: JSON.stringify({ carrito: carrito.kebabs }) // Datos que se envían al servidor
         });
 
         const data = await response.json();

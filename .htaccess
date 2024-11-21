@@ -20,17 +20,17 @@ RewriteRule ^personalizar/(.+) /Api/ApiPersonalizar.php?var=$1 [L]
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^logearse /Api/ApiLogin.php [L]
 
-# Redirige las solicitudes que vienen de www.mykebab.com/logearse/ a Api/ApiLogin.php
+# Redirige las solicitudes que vienen de www.mykebab.com/direccion/ a Api/ApiDireccion.php
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^direccion/(.+) /Api/ApiDireccion.php?var=$1 [L]
 
-# Redirige las solicitudes que vienen de www.mykebab.com/logearse/ a Api/ApiLogin.php
+# Redirige las solicitudes que vienen de www.mykebab.com/usuario/ a Api/ApiUsuario.php
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^usuario/(.+) /Api/ApiUsuario.php?var=$1 [L]
 
-# # Redirige las solicitudes que vienen de www.mykebab.com/logearse/ a Api/ApiLogin.php
-# RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
-# RewriteRule ^registrarse /Api/ApiRegistro.php [L]
+# Redirige las solicitudes que vienen de www.mykebab.com/realizarcompra/ a Api/Apirealizarcompra.php
+RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
+RewriteRule ^realizarcompra /Api/Apirealizarcompra.php [L]
 
 
 # Redirige todas las demás solicitudes a index.php

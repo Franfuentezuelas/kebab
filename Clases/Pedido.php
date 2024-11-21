@@ -5,27 +5,19 @@ class Pedido implements ToJSON {
      * Clase Pedido
      */
 
-    private ?int $id; // ID del pedido, puede ser null si se autogenera
-    private int $usuario_id; // ID del usuario que realiza el pedido
-    private DateTime $fecha; // Fecha del pedido
-    private string $direccion; // Almacena la dirección como string
-    private Estado $estado; // Estado del pedido (recibido, en proceso, entregado, etc.)
-    private array $lineas; // Líneas de pedido, contiene los kebabs seleccionados
-    private float $importe; // Precio total sumando todos los totales de las líneas
-
     public function __construct(
-        int $id = null, // ID de la línea de pedido, puede ser null si se autogenera
+        ?int $id = null, // ID de la línea de pedido, puede ser null si se autogenera
         int $usuario_id,
-        DateTime $fecha,
-        Direccion $direccion, // Objeto Dirección
+        ?DateTime $fecha = null, // Permitir que fecha sea null
+        ?String $direccion=null, // Objeto Dirección
         Estado $estado = Estado::RECIBIDO, // Estado por defecto
-        array $lineas = null, // Array de líneas de pedido por defecto vacío
+        ?array $lineas = null, // Array de líneas de pedido por defecto vacío
         float $importe = 0.0 // Importe total inicial
     ) {
         $this->id = $id;
         $this->usuario_id = $usuario_id;
-        $this->fecha = $fecha;
-        $this->direccion = $direccion->toString(); // Almacenar la representación en cadena de la dirección
+        $this->fecha = $fecha ?: new DateTime(); // Si no se pasa una fecha, usar la fecha actual
+        $this->direccion = $direccion; // Almacenar la representación en cadena de la dirección
         $this->estado = $estado;
         $this->lineas = $lineas;
         $this->importe = $importe;
