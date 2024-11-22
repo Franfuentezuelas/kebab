@@ -15,7 +15,9 @@ window.addEventListener("load", function () {
 
     // Actualiza el contador del carrito
     contador.textContent = carrito.kebabs.length;
+    console.log(carrito.kebabs.length);
     contador.value = carrito.kebabs.length;
+    console.log(carrito.kebabs.length);
 
     carrito.addEventListener("click", function () {
         
@@ -506,6 +508,7 @@ carrito.kebabs.forEach(function (kebab) {
                         
                         console.log(data);
                 
+                        
                             // Mostrar mensaje de compra
                             const message = document.createElement("p");
                             message.textContent = "¡Compra realizada con éxito!";
@@ -546,7 +549,7 @@ carrito.kebabs.forEach(function (kebab) {
 
                             }, 2000); // 3000 milisegundos = 3 segundos
 
-                        
+       
                     })
                     .catch(error => {
                         console.error("Error en la solicitud:", error);
@@ -854,11 +857,12 @@ async function actualizarCarrito(carro) {
             });
 
             // Actualizamos el contador del carrito
+            actualizarCarrito(carrito);
             actualizarContador(carrito);
             actualizarCarritoServidor(carrito);
 
             // Guardamos el carrito actualizado en localStorage
-            localStorage.setItem("carrito", JSON.stringify(carrito));
+            localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
 
             // Cerramos el modal
             document.body.removeChild(modal);
@@ -869,8 +873,10 @@ async function actualizarCarrito(carro) {
             // Cerramos el modal sin hacer cambios
             document.body.removeChild(modal);
                    // Enviar el carrito actualizado al servidor
+        actualizarCarrito(carrito);
         actualizarCarritoServidor(carrito);
         actualizarContador(carrito);
+        localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
         });
 
         btnSumarCarritos.addEventListener("click", () => {
@@ -881,8 +887,10 @@ async function actualizarCarrito(carro) {
                     carrito.kebabs.push(kebab);
                 }
                        // Enviar el carrito actualizado al servidor
+            actualizarCarrito(carrito);
             actualizarCarritoServidor(carrito);
             actualizarContador(carrito);
+            localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
             });
 
 

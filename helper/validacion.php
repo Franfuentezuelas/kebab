@@ -2,7 +2,7 @@
 class Validacion
 {
     //Array de errores
-    private $errores;
+    public $errores;
 
     //Constructor
     public function __construct()
@@ -116,7 +116,7 @@ class Validacion
      */
     public function Patron($campo,$patron)
     {
-        if(!preg_match($patron,$_POST[$campo]))
+        if(!preg_match($patron,$campo))
         {
             $this->errores[$campo]="No cumple el patrón $patron";
             return false;
