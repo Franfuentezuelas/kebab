@@ -125,7 +125,7 @@ class TransaccionPedido {
             $linea = RepoLineaPedido::nuevo($linea);
            
         }
-       
+        $pedido->lineas = $lineasPedido;
             // Si todo va bien, hacer commit de la transacción
             $pdo->commit();
             // devolvemos el pedido creado correctamente

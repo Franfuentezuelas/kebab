@@ -506,7 +506,6 @@ carrito.kebabs.forEach(function (kebab) {
                         
                         console.log(data);
                 
-                        if (data == "ok") {
                             // Mostrar mensaje de compra
                             const message = document.createElement("p");
                             message.textContent = "¡Compra realizada con éxito!";
@@ -547,9 +546,7 @@ carrito.kebabs.forEach(function (kebab) {
 
                             }, 2000); // 3000 milisegundos = 3 segundos
 
-                        } else {
-                            alert("Error al realizar la compra");
-                        }
+                        
                     })
                     .catch(error => {
                         console.error("Error en la solicitud:", error);

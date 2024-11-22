@@ -29,15 +29,21 @@ if(loguear::estaLogado()){
         try {
 
         $pedido = TransaccionPedido::transaccionPedido($_SESSION['user']->id);
-        $_SESSION['user']->carrito= "[{}]";
-       
+           
+
+        
+            Correo::Correo($_SESSION['user'], $pedido);
+
+            $_SESSION['user']->carrito= "[{}]";
+
         //RepoUsuario::updateCarro($_SESSION['user']->id);
 
             // Respuesta exitosa para obtener la lista de kebabs
             http_response_code(200);
             // Mostrar mensaje de éxito
             echo "ok";
-    
+
+            
         } catch (Exception $e) {
 
             // Respuesta exitosa para obtener la lista de kebabs
