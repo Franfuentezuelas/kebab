@@ -122,8 +122,8 @@ Loguear::iniciarSesion();
         <?php
          require_once './Vistas/Principal/scripts.php';
         if(isset($tipo)){
-            require_once './Vistas/Principal/scriptsPedidos.php';
-            }else{
+            require_once './Vistas/Principal/scriptsEmpresa.php';
+            }
         switch ($var) {
             case 'inicio':
                 require_once './Vistas/Principal/scriptsInicio.php';
@@ -147,7 +147,6 @@ Loguear::iniciarSesion();
                 require_once './Vistas/Principal/scriptsPedidos.php';
                 break;
             }
-        }
     ?>
 </body>
 </html>

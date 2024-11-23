@@ -1,7 +1,7 @@
 <main class="container my-4">
-    <div class="productos text-center">
-        
-            <h1>LISTADO DE KEBABS</h1>
+<section class="row text-center p-4" id="tablaKebab">
 
-    </div>
+<H1>LISTADO DE KEBABS Vendidos</H1>
+    
+</section>
 </main>

@@ -1,4 +1,5 @@
-<script src="js/jsPedidosEmpresa.js"></script><!-- JS personalizado -->
+
+<script src="js/jsCrearKebab.js"></script><!-- JS personalizado -->
 <link rel="stylesheet" href="css/pedidos.css"><!-- CSS personalizado -->
     
     <!-- Agregar FontAwesome para los iconos -->

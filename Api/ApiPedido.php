@@ -83,6 +83,22 @@ if(isset($_GET['var']) && loguear::estaLogado()){
                 echo json_encode(["error" => "No tiene permiso para realizar esta acción"]);
             }
             break;
+        case 'tablakebab':
+            // Respuesta exitosa para obtener la lista de kebabs
+            http_response_code(200);
+            // Quiero enviar la plantilla de personalización que es un archivo php
+            $plantilla = file_get_contents('../Plantilla/plantillatablakebab.html');
+            // Codificar en formato JSON y mostrar
+            echo $plantilla;
+            break;
+        case 'kebabsCuenta':
+            // Respuesta exitosa para obtener la lista de kebabs
+            http_response_code(200);
+            // Quiero enviar la plantilla de personalización que es un archivo php
+            $datos = RepoKebab::getVendidos();
+            // Codificar en formato JSON y mostrar
+            echo json_encode($datos);
+            break;
         default:
             // Respuesta para un endpoint no encontrado
             http_response_code(404); // Usualmente se usa el código 404 para "Not Found"

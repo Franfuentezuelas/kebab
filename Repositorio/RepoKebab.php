@@ -385,4 +385,39 @@ class Repokebab implements RepoCrud
         // Devolver el array de objetos Kebab
         return $kebabs;
     }
+
+    public static function getVendidos() {
+        // Obtener la conexión
+        $con = Conexion::getConection();
+        
+        // Array para almacenar los objetos Kebab
+        $listado = [];
+        
+        // Crear la consulta SQL
+        $sql = "SELECT COALESCE(COUNT(p.kebab_id), 0) AS cantidad, 
+                    k.*
+                FROM kebab k LEFT JOIN pedido_kebab p ON k.id = p.kebab_id
+                GROUP BY k.id, k.nombre, k.precio, k.descripcion;";
+        
+        // Preparar la consulta
+        $consulta = $con->prepare($sql);
+        
+        // Ejecutar la consulta
+        if ($consulta->execute()) {
+            // Recorremos los resultados utilizando un array asociativo
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $objeto = new stdClass();
+                $objeto->id = $fila["id"];
+                $objeto->nombre = $fila["nombre"];
+                $objeto->foto = $fila["foto"];
+                $objeto->precio = $fila["precio"];
+                $objeto->descripcion = $fila["descripcion"];
+                $objeto->cantidad = $fila["cantidad"];
+                
+                $listado[] = $objeto;
+            }
+        }
+        // Devolver el array de objetos Kebab
+        return $listado;
+    }
 }
