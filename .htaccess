@@ -36,6 +36,9 @@ RewriteRule ^realizarcompra /Api/Apirealizarcompra.php [L]
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^pedido/(.+) /Api/ApiPedido.php?var=$1 [L]
 
+# Redirige las solicitudes que vienen de www.mykebab.com/foto/ a /Canvas/Canvas.php
+RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
+RewriteRule ^foto /Canvas/Canvas.php [L]
 
 # Redirige todas las demás solicitudes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f

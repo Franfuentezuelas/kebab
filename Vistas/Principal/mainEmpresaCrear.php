@@ -3,10 +3,17 @@
         <div class="producto-container">
             <div class="producto-box">
                 <div class="row">
+                    
                     <!-- Columna 1: Imagen y descripción -->
                     <div class="column" id="columna1">
+                        <h4>FOTO</h4>
                         <img src="" alt="Kebab" id="imagen">
-                        <p id="descripcion"></p>
+                        <h4>NOMBRE</h4>
+                        <textarea id="nombre" placeholder="Nombre del Kebab" rows="2" cols="27"></textarea>
+                        <h4>DESCRIPCIÓN</h4>
+                        <textarea id="descripcion" placeholder="Descripción del Kebab" rows="5" cols="27"></textarea>
+
+
                     </div>
 
                     <!-- Columna 2: Ingredientes -->
@@ -30,7 +37,14 @@
                 <div class="bottom-section" id="botones">
                     <!-- Precio -->
                     <div class="price">
-                    <strong><p id="precio">Precio: $9.99</p></strong>
+                        <div>
+                        <h5>Precio</h5>
+                        <strong><p id="precioreal"><input type="text" maxlength="5" size="7" id="precioEmpresa"><spam>€</spam></p></strong>
+                        </div>
+                        <div>
+                        <h5>Precio Al Gusto</h5> 
+                        <strong><p id="precio">Precio: $9.99</p></strong>
+                        </div>
                     </div>
 
                     <!-- Alergenos -->
@@ -44,7 +58,7 @@
                     <!-- Botones -->
                     <div class="actions">
                         <!-- <button class="btn btn-secondary">Volver</button> -->
-                        <button class="btn btn-primary" id="comprar">Comprar</button>
+                        <button class="btn btn-primary" id="guardar">Guardar</button>
                     </div>
                 </div>
             </div>

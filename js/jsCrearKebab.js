@@ -1,94 +1,49 @@
 window.addEventListener("load", function() {
     cargarTablaKebab();
     // incluir el evento de pulsar comprar
-    const comprar = document.getElementById("comprar");
-    comprar .addEventListener('click', function() {
+    const precioEmpresa= document.getElementById("precioEmpresa");
+    precioEmpresa.addEventListener('input', function(event) {
+        // Definir la expresión regular para aceptar los patrones válidos
+        const regex = /^[0-9]{0,2}([,.]{1}[0-9]{0,2})?$/;
+    
+        // Si el valor no cumple con el patrón, lo elimina
+        if (!regex.test(event.target.value)) {
+            event.target.value = event.target.value.slice(0, -1);
+        }
+    });
+    
+    document.querySelector('img').addEventListener('click', function() {
+        // abro una nueva pestaña para capturar la imagen y guardarla
+        const nuevaVentana = window.open(
+            'http://www.mykebab.com/foto', 
+            '_blank', 
+            'noopener,noreferrer,width=800,height=600,scrollbars=yes'
+        );
+        
+        if (!nuevaVentana) {
+            alert('La ventana no se pudo abrir. Verifica que no esté bloqueada por el navegador.');
+            return;
+        }
+    
+        // Escucha los mensajes de la nueva ventana
+        window.addEventListener('message', function(event) {
+            // Verifica que el mensaje provenga de la nueva ventana
+            if (event.origin !== 'http://www.mykebab.com') {
+                console.warn('Origen desconocido:', event.origin);
+                return;
+            }
+    
+            // Aquí puedes procesar los datos que te envíe la nueva ventana
+            console.log('Imagen guardada:', event.data);
+        });
+    });
+
+    
+    const guardar = document.getElementById("guardar");
+    guardar .addEventListener('click', function() {
+        alert ("guardando");
         // obtengo el kebab con los ingredientes seleccionados
         // tengo que cojer el kebab 
-        const kebab= document.getElementById("imagen").kebab;
-        // obtengo los ingredientes seleccionados
-        var seleccionados = Array.from(document.getElementById("ingredientes").children);
-        // obtengo el precio que se ha calculado
-        // si tiene los mismos compramos el kebab directamente
-        // si no modificamos el kebab pasando el id a kebab_id
-        // los ingredientes los cambio por los que tiene seleccionados 
-        // meto el precio nuevo calculado
-        // agrego el kebab al carrito 
-        // recargo la pagina para que vuelva al punto inicial y podamos crear otro personalizado en este caso
-        // verifico si el kebab tiene los mismos ingredientes que hay seleccionados
-        kebab.ingredientes.sort((a, b) => a.id-b.id);
-        seleccionados.sort((a, b) => a.id-b.id);
-        console.log(kebab.ingredientes);
-        console.log(seleccionados);
-        var mismoKebab = true;
-        if (kebab.ingredientes.length === seleccionados.length) {
-             
-            for (let i = 0; i < kebab.ingredientes.length; i++) {
-                if (kebab.ingredientes[i] !== seleccionados[i]) {
-                    if(mismoKebab){
-                        mismoKebab = false;
-                    }
-                }
-            }
-        }else{
-            mismoKebab = false;
-        }
-        
-
-        if (mismoKebab) {
-            alert("Tiene que tener al menos un ingrediente");
-            // metes en el carro el kebab de la casa
-            // y cambias el carro agregando el nuevo kebab
-            // cambias el numero de kebab que tiene el carro
-            
-        }else{
-            console.log(kebab);
-            //solo metemos el kebab si almenos tiene un ingrediente
-            if(kebab.nombre == "Kebab Al Gusto" && seleccionados.length>0){
-                kebab.kebab_id= kebab.id;
-                kebab.id= null;
-                kebab.nombre=kebab.nombre+" personalizado";
-                kebab.ingredientes=[];
-                var preciosIngredientes=[];
-                seleccionados.forEach(function(select){
-                    kebab.ingredientes.push(select.ingrediente);
-                    preciosIngredientes.push(select.ingrediente.precio);
-                });
-                kebab.ingredientes.sort((a, b) => a.id-b.id);
-                preciosIngredientes.sort((a, b) => a - b);
-                preciosIngredientes=preciosIngredientes.slice(3);
-                var precioTotal=precio.value;
-                preciosIngredientes.forEach(function(precio){
-                    precioTotal+=precio;
-                });
-                kebab.nuevoPrecio=precioTotal;
-                console.log(kebab);
-                // mandamos el kebab al carrito
-                // Obtén el contenedor del carrito y el contador
-                var carrito = document.getElementById("carrito");
-                var contador = document.getElementById("contador");
-                carrito.kebabs.push(kebab);
-
-                // Guardar el carrito actualizado en localStorage
-                localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
-
-                // Actualizar el contador
-                var contar = carrito.kebabs.length; // Número de kebabs en el carrito
-                contador.value = contar;  // Actualiza el valor si el contador es un input
-                contador.textContent = contar;  // Actualiza el texto si el contador es un span
-                console.log(carrito.kebabs);
-
-            }
-
-            alert("Kebab agregado al carrito");
-            actualizar(carrito.kebabs);
-            // mando el kebab al carrito directamente
-                // Recargar la página
-                location.reload();
-            
-        }
-
-        
     });
 
     //Hacer la solicitud a la API para obtener el kebab
@@ -106,9 +61,9 @@ window.addEventListener("load", function() {
         precio.innerHTML = "";
 
         // Añadimos los atributos del kebab
-        imagen.src = `./imagenes/${kebab.foto}`;
+        imagen.src = `./imagenes/foto.png`;
         imagen.kebab = kebab;
-        descripcion.innerHTML = kebab.descripcion; 
+        
         precio.innerHTML = kebab.precio+"€";
         precio.value = kebab.precio;
 

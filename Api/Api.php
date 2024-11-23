@@ -60,6 +60,13 @@ switch ($peticion) {
         // Codificar en formato JSON y mostrar
         echo json_encode($ingredientes);
         break;
+    case 'canvas':
+        // Respuesta exitosa para obtener la lista de kebabs
+        http_response_code(200);
+        // Lógica para devolver la lista de kebabs
+        // Codificar en formato JSON y mostrar
+        echo file_get_contents('../canvas/index.html');
+        break;
 
     default:
         // Respuesta para un endpoint no encontrado
