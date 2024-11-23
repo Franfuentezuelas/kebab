@@ -1,0 +1,23 @@
+.RECIBIDO {   
+    background-color: blue;
+    text-align: center;
+    color: white;
+}
+
+.ENPREPARACION {   
+    background-color: orange;
+    text-align: center;
+    color: white;
+}
+
+.ENVIADO {   
+    background-color:  red;
+    text-align: center;
+    color: white;
+}
+
+.COMPLETADO {
+    width: 100px;
+    text-align: center;
+    background-color: green;
+}

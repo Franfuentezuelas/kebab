@@ -3,7 +3,7 @@
 
 enum Estado: string {
     case RECIBIDO = 'RECIBIDO';
-    case ENPREPARACION = 'EN PREPARACION';
+    case ENPREPARACION = 'ENPREPARACION';
     case ENVIADO = 'ENVIADO';
     case COMPLETADO = 'COMPLETADO';
 }

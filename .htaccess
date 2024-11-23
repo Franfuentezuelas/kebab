@@ -32,6 +32,10 @@ RewriteRule ^usuario/(.+) /Api/ApiUsuario.php?var=$1 [L]
 RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
 RewriteRule ^realizarcompra /Api/Apirealizarcompra.php [L]
 
+# Redirige las solicitudes que vienen de www.mykebab.com/realizarcompra/ a Api/Apirealizarcompra.php
+RewriteCond %{HTTP_HOST} ^www\.mykebab\.com$ [NC]
+RewriteRule ^pedido/(.+) /Api/ApiPedido.php?var=$1 [L]
+
 
 # Redirige todas las demás solicitudes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f

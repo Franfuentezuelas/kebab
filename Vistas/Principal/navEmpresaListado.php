@@ -4,20 +4,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto"> <!-- Centra el menú -->
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio">Inicio</a>
+                <li class="nav-item active">
+                    <a class="nav-link marcado" href="listaKebab">Lista Kebab</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="carta">Carta de la casa</a>
+                    <a class="nav-link" href="crear">Crear Kebab</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link" href="gusto">Kebab al gusto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacto">Contacto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pedidos">Pedidos</a>
+                    <a class="nav-link " href="pedidos">Pedidos</a>
                 </li>
             </ul>
         </div>

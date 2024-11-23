@@ -592,12 +592,14 @@ carrito.kebabs.forEach(function (kebab) {
                     const login = document.getElementById("sesion");
                     login.style.display = "";
                     const user = document.getElementById("user");
+                    user.usuario="";
                     user.innerHTML = "";
                 } else {
                     cambiarIconoUsuario(usuario);
                     const login = document.getElementById("sesion");
                     var user = document.createElement("a");
                     user.id = "user";
+                    user.usuario=usuario;
                     user.innerHTML = usuario;
 
                     // Configurar estilos del enlace contenedor

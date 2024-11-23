@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto"> <!-- Centra el menú -->
                 <li class="nav-item active">
-                    <a class="nav-link marcado" href="login">Inicio</a>
+                    <a class="nav-link marcado" href="inicio">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="carta">Carta de la casa</a>
@@ -16,6 +16,10 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="contacto">Contacto</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="pedidos">Pedidos</a>
                 </li>
             </ul>
         </div>

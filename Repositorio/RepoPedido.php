@@ -16,7 +16,6 @@ class RepoPedido
             ':importe' => $pedido->importe,
             ':usuario_id' => $pedido->usuario_id,
             ':direccion' => $pedido->direccion // Convertir a JSON si es necesario
-        
         ];
 
         // Ejecutar la consulta
@@ -56,38 +55,88 @@ class RepoPedido
     }
 
     public static function getAll() {
-        $con = Conexion::getConection();
-        $pedidos = [];
-        
-        $sql = "SELECT * FROM pedido";
-        
-        $consulta = $con->prepare($sql);
-        $consulta->execute();
-        
-        while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $pedidos[] = new Pedido(
-                $fila["id"],
-                $fila["usuario_id"],
-                new DateTime($fila["fecha"]),
-                $fila["direccion"],
-                Estado::RECIBIDO,
-                [],
-                (float)$fila["importe"]
-            );
+            $con = Conexion::getConection();
+            $pedidos = [];
+            
+            $sql = "SELECT * FROM pedido order by id asc"; // obtengo el ultimo primero
+            // podria realizar el select de 10 elementos para mostrar los ultimos
+            $consulta = $con->prepare($sql);
+
+            $consulta->execute();
+            
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $pedidos[] = new Pedido(
+                    $fila["id"],
+                    $fila["usuario_id"],
+                    new DateTime($fila["fecha"]),
+                    $fila["direccion"],
+                    Estado::from($fila["estado"]),
+                    [], //lineas de pedido ahora mismo no las cargamos por que no las muestro
+                    (float)$fila["importe"]
+                );
+            }
+            return $pedidos;
         }
-        
-        return $pedidos;
-    }
+
+        public static function getCocinaAll() {
+            $con = Conexion::getConection();
+            $pedidos = [];
+            
+            $sql = "SELECT * FROM pedido where estado = 'RECIBIDO' or estado = 'ENPREPARACION' order by id asc"; // obtengo el ultimo primero
+            // podria realizar el select de 10 elementos para mostrar los ultimos
+            $consulta = $con->prepare($sql);
+
+            $consulta->execute();
+            
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $pedidos[] = new Pedido(
+                    $fila["id"],
+                    $fila["usuario_id"],
+                    new DateTime($fila["fecha"]),
+                    $fila["direccion"],
+                    Estado::from($fila["estado"]),
+                    [], //lineas de pedido ahora mismo no las cargamos por que no las muestro
+                    (float)$fila["importe"]
+                );
+            }
+            return $pedidos;
+        }
+
+        public static function getRepartidorAll() {
+            $con = Conexion::getConection();
+            $pedidos = [];
+            
+            $sql = "SELECT * FROM pedido where estado = 'ENVIADO' order by id asc"; // obtengo el ultimo primero
+            // podria realizar el select de 10 elementos para mostrar los ultimos
+            $consulta = $con->prepare($sql);
+
+            $consulta->execute();
+            
+            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $pedidos[] = new Pedido(
+                    $fila["id"],
+                    $fila["usuario_id"],
+                    new DateTime($fila["fecha"]),
+                    $fila["direccion"],
+                    Estado::from($fila["estado"]),
+                    [], //lineas de pedido ahora mismo no las cargamos por que no las muestro
+                    (float)$fila["importe"]
+                );
+            }
+            return $pedidos;
+        }
 
     public static function getByUsuarioId($usuario_id) {
         $con = Conexion::getConection();
         $pedidos = [];
         
-        $sql = "SELECT * FROM pedido WHERE usuario_id = :usuario_id";
-        
+        $sql = "SELECT * FROM pedido WHERE usuario_id = :usuario_id order by id desc"; // obtengo el ultimo primero
+        // podria realizar el select de 10 elementos para mostrar los ultimos
         $consulta = $con->prepare($sql);
-        $consulta->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
-        $consulta->execute();
+        $parametros = [
+            ':usuario_id' => $usuario_id
+        ];
+        $consulta->execute($parametros);
         
         while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $pedidos[] = new Pedido(
@@ -95,23 +144,23 @@ class RepoPedido
                 $fila["usuario_id"],
                 new DateTime($fila["fecha"]),
                 $fila["direccion"],
-                Estado::from($fila["estado"]), // Convierte el estado de la base de datos al enum
+                Estado::from($fila["estado"]),
+                [], //lineas de pedido ahora mismo no las cargamos por que no las muestro
                 (float)$fila["importe"]
             );
         }
-        
         return $pedidos;
     }
     
-    public static function updateEstado(Pedido $pedido, Estado $nuevoEstado) {
+    public static function updateEstado($id, $nuevoEstado) {
         $con = Conexion::getConection();
         
         $sql = "UPDATE pedido SET estado = :estado WHERE id = :id";
         
         $consulta = $con->prepare($sql);
         $parametros = [
-            ':estado' => $nuevoEstado->value, // Usar el valor del enum
-            ':id' => $pedido->getId()
+            ':estado' => $nuevoEstado, // Usar el valor del enum
+            ':id' => $id
         ];
 
         return $consulta->execute($parametros);
