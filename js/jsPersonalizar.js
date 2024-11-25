@@ -19,8 +19,8 @@ window.addEventListener("load", function() {
 
     // Realizamos las dos solicitudes en paralelo con Promise.all
     Promise.all([
-        fetch("http://www.mykebab.com/aplicacion/ingredientes").then(response => response.json()),
-        fetch("http://www.mykebab.com/aplicacion/gusto").then(response => response.json())
+        fetch("https://www.mykebab.com/aplicacion/ingredientes").then(response => response.json()),
+        fetch("https://www.mykebab.com/aplicacion/gusto").then(response => response.json())
     ])
     .then(([ingredientes, kebab]) => {
         // Después de que ambas solicitudes se resuelvan, ocultamos el "loading"

@@ -15,7 +15,7 @@ window.addEventListener("load", function() {
     document.querySelector('img').addEventListener('click', function() {
         // abro una nueva pestaña para capturar la imagen y guardarla
         const nuevaVentana = window.open(
-            'http://www.mykebab.com/foto', 
+            'https://www.mykebab.com/foto', 
             '_blank', 
             'noopener,noreferrer,width=800,height=600,scrollbars=yes'
         );
@@ -28,7 +28,7 @@ window.addEventListener("load", function() {
         // Escucha los mensajes de la nueva ventana
         window.addEventListener('message', function(event) {
             // Verifica que el mensaje provenga de la nueva ventana
-            if (event.origin !== 'http://www.mykebab.com') {
+            if (event.origin !== 'https://www.mykebab.com') {
                 console.warn('Origen desconocido:', event.origin);
                 return;
             }
@@ -47,7 +47,7 @@ window.addEventListener("load", function() {
     });
 
     //Hacer la solicitud a la API para obtener el kebab
-    fetch("http://www.mykebab.com/aplicacion/gusto") //https://cors-anywhere.herokuapp.com/http://www.mykebab.com/aplicacion/kebabs
+    fetch("https://www.mykebab.com/aplicacion/gusto") //https://cors-anywhere.herokuapp.com/http://www.mykebab.com/aplicacion/kebabs
     .then(response => response.json())
     .then(kebab => {
         // Obtenemos el contenedor donde estarán los elementos del carrusel

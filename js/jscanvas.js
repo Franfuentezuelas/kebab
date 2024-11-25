@@ -304,7 +304,7 @@ window.addEventListener("load", function() {
 function enviarImagenGuardada(imagen) {
     // Asegúrate de que `window.opener` esté disponible (es decir, que haya una ventana principal abierta)
     if (window.opener) {
-        window.opener.postMessage(imagen, 'http://www.mykebab.com'); // Envia la imagen a la ventana principal
+        window.opener.postMessage(imagen, 'https://www.mykebab.com'); // Envia la imagen a la ventana principal
     }
        // Después de enviar la imagen, cierra la ventana
        window.close();

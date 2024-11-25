@@ -4,7 +4,7 @@ window.addEventListener("load", function() {
     var contador = document.getElementById("contador");
 
 
-    fetch('http://www.mykebab.com/direccion/provincias')
+    fetch('https://www.mykebab.com/direccion/provincias')
     .then(response => response.json())  // Parsear la respuesta como JSON
     .then(data => {
         var provincias=document.getElementById("provincia");
@@ -37,7 +37,7 @@ provincia.addEventListener('change', function() {
         localidad.setAttribute("disabled", "true"); // Deshabilitar localidad
     } else {
         // Si se selecciona una provincia válida, habilitar el select de localidad
-        fetch('http://www.mykebab.com/direccion/' + provincia.value)
+        fetch('https://www.mykebab.com/direccion/' + provincia.value)
             .then(response => response.json()) // Parsear la respuesta como JSON
             .then(data => {
                 localidad.innerHTML = ""; // Limpiar el select de localidades
@@ -227,7 +227,7 @@ provincia.addEventListener('change', function() {
     // Evento que se ejecuta cuando el usuario pulsa el botón "enviar"
     if (usuarioRegistrado){
             //realizo la peticion a la API para saber si el usuario ya esta registrado
-            fetch('http://www.mykebab.com/logearse', {
+            fetch('https://www.mykebab.com/logearse', {
                 method: 'POST',  // Especificar el método de envío
                 headers: {
                     'Content-Type': 'application/json',  // Tipo de contenido

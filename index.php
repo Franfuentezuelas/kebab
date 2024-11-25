@@ -26,6 +26,10 @@ class Principal
                 require_once './controlador/acceso.php';
             }
         }
+       
+        if (isset($_SESSION["user"]) && $_SESSION['user']->tipo !== Tipo::USUARIO && $_GET['var']=="inicio"){
+            $_GET['var']="pedidos";
+        }
         //require_once './helper/sesion.php';
         require_once './Vistas/Principal/layout.php';
     }

@@ -97,7 +97,7 @@ window.addEventListener("load", function() {
     });
 
     //Hacer la solicitud a la API para obtener el kebab
-    fetch("http://www.mykebab.com/aplicacion/gusto") //https://cors-anywhere.herokuapp.com/http://www.mykebab.com/aplicacion/kebabs
+    fetch("https://www.mykebab.com/aplicacion/gusto") //https://cors-anywhere.herokuapp.com/http://www.mykebab.com/aplicacion/kebabs
     .then(response => response.json())
     .then(kebab => {
         // Obtenemos el contenedor donde estarán los elementos del carrusel
@@ -135,7 +135,7 @@ window.addEventListener("load", function() {
     .catch(error => console.error("Error fetching kebabs:", error)); // Manejo de errores
 
     // Fetch para obtener los ingredientes desde el servidor
-    fetch("http://www.mykebab.com/aplicacion/ingredientes")
+    fetch("https://www.mykebab.com/aplicacion/ingredientes")
         .then(response => response.json())
         .then(ingredientes => {
             // Obtenemos el contenedor donde estarán los elementos del carrusel
@@ -319,7 +319,7 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+        fetch('https://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/text',

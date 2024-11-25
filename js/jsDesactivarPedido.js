@@ -4,7 +4,7 @@ window.addEventListener("load", function() {
 });
 
 async function Logado() {
-    await fetch('http://www.mykebab.com/usuario/nombre')
+    await fetch('https://www.mykebab.com/usuario/nombre')
         .then(response => response.text())
         .then(usuario => {
             console.log(usuario);

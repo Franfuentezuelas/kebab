@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
 
     // API para pedir el nombre del usuario
     async function cargarusuario() {
-        await fetch('http://www.mykebab.com/usuario/nombre')
+        await fetch('https://www.mykebab.com/usuario/nombre')
             .then(response => response.text())
             .then(usuario => {
                 console.log(usuario);
@@ -116,7 +116,7 @@ window.addEventListener("load", function () {
                         logoutButton.style.cursor = "pointer";
                         logoutButton.addEventListener("click", function () {
                             
-                            fetch('http://www.mykebab.com/usuario/logout')
+                            fetch('https://www.mykebab.com/usuario/logout')
                             .then(response => response.text())
                             .then(data => {
                                 console.log(data);   

@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     var contador = document.getElementById("contador");
     
    // Fetch para obtener los kebabs desde el servidor
-    fetch("http://www.mykebab.com/aplicacion/kebabs")
+    fetch("https://www.mykebab.com/aplicacion/kebabs")
         .then(response => response.json())
         .then(kebabs => {
             // Obtenemos el elemento que contiene el carrusel (el contenedor de los items)
@@ -87,7 +87,7 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+        fetch('https://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/text',

@@ -59,7 +59,7 @@ window.addEventListener("load", function() {
         // si no hay errores realizo la comprobacion con la API login
         if (valido) {
             //realizo la peticion a la API
-            fetch('http://www.mykebab.com/logearse', {
+            fetch('https://www.mykebab.com/logearse', {
                 method: 'POST',  // Especificar el método de envío
                 headers: {
                     'Content-Type': 'application/json',  // Tipo de contenido

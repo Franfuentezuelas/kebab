@@ -502,7 +502,7 @@ carrito.kebabs.forEach(function (kebab) {
                 // Tengo que decirle al servidor que quiero realizar la compra
                 // y que el carrito queda vacío
 
-                fetch('http://www.mykebab.com/realizarcompra')
+                fetch('https://www.mykebab.com/realizarcompra')
                     .then(response => response.text())
                     .then(data => {
                         
@@ -583,7 +583,7 @@ carrito.kebabs.forEach(function (kebab) {
 
     // API para pedir el nombre del usuario
     async function cargarusuario() {
-        await fetch('http://www.mykebab.com/usuario/nombre')
+        await fetch('https://www.mykebab.com/usuario/nombre')
             .then(response => response.text())
             .then(usuario => {
                 console.log(usuario);
@@ -688,7 +688,7 @@ carrito.kebabs.forEach(function (kebab) {
                         logoutButton.addEventListener("click", function () {
                             // Borrar el carrito del local storage
                             localStorage.removeItem("carrito");
-                           fetch('http://www.mykebab.com/usuario/logout')
+                           fetch('https://www.mykebab.com/usuario/logout')
                             .then(response => response.text())
                             .then(data => {
                                 console.log(data);                                
@@ -765,7 +765,7 @@ async function actualizarCarrito(carro) {
    
     try {
         // Pido el carrito del servidor
-        const response = await fetch('http://www.mykebab.com/usuario/carrito');
+        const response = await fetch('https://www.mykebab.com/usuario/carrito');
         const data = await response.json();
 
         if (!Array.isArray(data)) {
@@ -919,7 +919,7 @@ function actualizarContador(carrito) {
 // Función para enviar el carrito actualizado al servidor
 async function actualizarCarritoServidor(carrito) {
     try {
-        const response = await fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+        const response = await fetch('https://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

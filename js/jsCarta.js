@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     var contador = document.getElementById("contador");
     
     // Hacer la solicitud a la API para obtener los kebabs
-    fetch("http://www.mykebab.com/aplicacion/kebabs")
+    fetch("https://www.mykebab.com/aplicacion/kebabs")
         .then(response => response.json())
         .then(kebabs => {
             // Obtenemos el contenedor donde estarán los elementos del carrusel
@@ -53,7 +53,7 @@ window.addEventListener("load", function() {
                 // comprobamos si el div editarkebab existe
                 if (!editarkebab) {
                 // ahora cargo la plantilla de personalizacion
-                await fetch("http://www.mykebab.com/personalizar/plantilla")
+                await fetch("https://www.mykebab.com/personalizar/plantilla")
                     .then(response => response.text())
                     .then(plantilla => {
                         const personalizar = plantilla;
@@ -230,7 +230,7 @@ window.addEventListener("load", function() {
                     })
                     .then(async function() {
                         // Fetch para obtener los ingredientes desde el servidor
-    await fetch("http://www.mykebab.com/aplicacion/ingredientes")
+    await fetch("https://www.mykebab.com/aplicacion/ingredientes")
     .then(response => response.json())
     .then(ingredientes => {
         // Obtenemos el contenedor donde estarán los elementos del carrusel
@@ -480,7 +480,7 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+        fetch('https://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/text',

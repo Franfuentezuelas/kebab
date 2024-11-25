@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
 
 async function LogadoOK() {
     var logado=false;
-    await fetch('http://www.mykebab.com/usuario/nombre')
+    await fetch('https://www.mykebab.com/usuario/nombre')
         .then(response => response.text())
         .then(usuario => {
             //console.log(usuario);
@@ -28,7 +28,7 @@ async function LogadoOK() {
 
 async function Pedidos() {
     var pedidos=false;
-    await fetch('http://www.mykebab.com/pedido/pedidos')
+    await fetch('https://www.mykebab.com/pedido/pedidos')
         .then(response => response.text())
         .then(pedidos => {
             //console.log(pedidos);
@@ -47,8 +47,8 @@ async function Pedidos() {
 function Pedidos() {
     // Realizar ambas peticiones simultáneamente utilizando Promise.all
     Promise.all([
-        fetch('http://www.mykebab.com/pedido/pedidos'),
-        fetch('http://www.mykebab.com/pedido/plantilla')
+        fetch('https://www.mykebab.com/pedido/pedidos'),
+        fetch('https://www.mykebab.com/pedido/plantilla')
     ])
     .then(([pedidosResponse, plantillaResponse]) => {
         // Procesar las respuestas de ambas peticiones
@@ -101,7 +101,7 @@ function Pedidos() {
 
                         // Realizar petición para actualizar el estado del pedido
                         
-                         fetch('http://www.mykebab.com/pedido/actualizarPedido', {
+                         fetch('https://www.mykebab.com/pedido/actualizarPedido', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
