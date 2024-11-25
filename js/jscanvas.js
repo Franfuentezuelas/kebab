@@ -132,13 +132,13 @@ window.addEventListener("load", function() {
 
     // Evento para guardar la imagen que se ve en el div foco y asi obtener lo que seleccionamos solamene
     guardar.addEventListener('click', () => {
-    // Obtener la URL de la imagen de fondo de foco (importente que se mantenga el tamaño original)
-    let focoImagenUrl = foco.style.backgroundImage.slice(5, -2); // Extraer solo la URL
+        // Obtener la URL de la imagen de fondo de foco (importente que se mantenga el tamaño original)
+        let focoImagenUrl = foco.style.backgroundImage.slice(5, -2); // Extraer solo la URL
 
-    // Crear un objeto Image para cargar la imagen de fondo que hemos obtenido
-    let imagenFondo = new Image();
-    // incluimos la imagen dentro del objeto
-    imagenFondo.src = focoImagenUrl;
+        // Crear un objeto Image para cargar la imagen de fondo que hemos obtenido
+        let imagenFondo = new Image();
+        // incluimos la imagen dentro del objeto
+        imagenFondo.src = focoImagenUrl;
 
         // Esperar a que la imagen se haya cargado ya que si no estara vacia o sin todos los datos
         imagenFondo.onload = function() {
@@ -183,6 +183,7 @@ window.addEventListener("load", function() {
 
             // Crear un nuevo elemento de imagen para mostrar la captura
             let imagenGuardada = document.createElement('img');
+            imagenGuardada.id="imagenGuardada";
             imagenGuardada.src = url;
 
             // Ajustar el tamaño de la imagen solo me permite poner un ajusto no lo los dos???? auto no le gusta
@@ -200,9 +201,10 @@ window.addEventListener("load", function() {
             // Mostrar la imagen guardada en el div
             imagenGuardada.style.display = 'block';
             imagenGuardada.style.margin = '0 auto';
+            
+            // Enviar la imagen a la ventana principal
+            enviarImagenGuardada();
         };
-        // Enviar la imagen a la ventana principal
-        enviarImagenGuardada(imagenGuardada);
 
     });
 
@@ -300,12 +302,19 @@ window.addEventListener("load", function() {
     manejarEscala();
 });
 
-// Suponiendo que ya tienes la imagen o el resultado de alguna operación:
-function enviarImagenGuardada(imagen) {
-    // Asegúrate de que `window.opener` esté disponible (es decir, que haya una ventana principal abierta)
-    if (window.opener) {
-        window.opener.postMessage(imagen, 'https://www.mykebab.com'); // Envia la imagen a la ventana principal
-    }
-       // Después de enviar la imagen, cierra la ventana
-       window.close();
+
+// Función para enviar la imagen a la ventana principal y cerrar la ventana hija
+function enviarImagenGuardada() {
+    const imagenGuardada=document.getElementById("imagenGuardada");
+        // Enviar la imagen como mensaje
+        console.log(imagenGuardada.src);
+        if (window.opener) {
+            // Envía el src de la imagen al padre sin validar el origen
+            window.opener.postMessage(imagenGuardada.src, "*"); // Usa "*" para permitir cualquier origen
+            
+            // Cierra la ventana hija
+            window.close();
+        } else {
+            console.error("No se pudo encontrar la ventana principal.");
+        }
 }

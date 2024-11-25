@@ -573,3 +573,8 @@ table tr td, table tr th {
 #canvas {
     display: none;
 }
+
+#salvar {
+    display:flex;
+    flex-direction: column;
+}

@@ -13,11 +13,11 @@ window.addEventListener("load", function() {
     });
     
     document.querySelector('img').addEventListener('click', function() {
-        // abro una nueva pestaña para capturar la imagen y guardarla
+        // Abro una nueva ventana para capturar la imagen y guardarla
         const nuevaVentana = window.open(
             'https://www.mykebab.com/foto', 
-            '_blank', 
-            'noopener,noreferrer,width=800,height=600,scrollbars=yes'
+            '_blank',
+            'width=800,height=600,scrollbars=yes'
         );
         
         if (!nuevaVentana) {
@@ -26,22 +26,27 @@ window.addEventListener("load", function() {
         }
     
         // Escucha los mensajes de la nueva ventana
-        window.addEventListener('message', function(event) {
-            // Verifica que el mensaje provenga de la nueva ventana
-            if (event.origin !== 'https://www.mykebab.com') {
-                console.warn('Origen desconocido:', event.origin);
-                return;
+        window.addEventListener("message", (event) => {
+            // Procesa directamente el contenido del mensaje
+            const imagenBase64 = event.data;
+            console.log("Imagen recibida:", imagenBase64);
+        
+            // Por ejemplo, establecer la imagen como src de un elemento en la ventana principal
+            const imgElement = document.querySelector('img');
+            if (imgElement) {
+                imgElement.src = imagenBase64;
             }
-    
-            // Aquí puedes procesar los datos que te envíe la nueva ventana
-            console.log('Imagen guardada:', event.data);
         });
+        
     });
+    
 
     
     const guardar = document.getElementById("guardar");
     guardar .addEventListener('click', function() {
-        alert ("guardando");
+        const error=document.getElementById("errores");
+        error.innerHTML="";
+        capturarKebab();
         // obtengo el kebab con los ingredientes seleccionados
         // tengo que cojer el kebab 
     });
@@ -85,7 +90,7 @@ window.addEventListener("load", function() {
     .catch(error => console.error("Error fetching kebabs:", error)); // Manejo de errores
 
     // Fetch para obtener los ingredientes desde el servidor
-    fetch("http://www.mykebab.com/aplicacion/ingredientes")
+    fetch("https://www.mykebab.com/aplicacion/ingredientes")
         .then(response => response.json())
         .then(ingredientes => {
             // Obtenemos el contenedor donde estarán los elementos del carrusel
@@ -269,7 +274,7 @@ function actualizar(carrito){
     const usuario = document.getElementById("user");
     console.log(usuario.innerText);
 
-        fetch('http://www.mykebab.com/usuario/actualizarCarrito', {
+        fetch('https://www.mykebab.com/usuario/actualizarCarrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/text',
@@ -294,8 +299,8 @@ function cargarTablaKebab(){
     // obtenemos el contenedor para insertar los datos
     const tablaKebab = document.getElementById("tablaKebab");
     Promise.all([
-        fetch('http://www.mykebab.com/pedido/tablakebab'),
-        fetch('http://www.mykebab.com/pedido/kebabsCuenta')
+        fetch('https://www.mykebab.com/pedido/tablakebab'),
+        fetch('https://www.mykebab.com/pedido/kebabsCuenta')
     ])
     .then(([plantilla, informekebab]) => {
         // Procesar las respuestas de ambas peticiones
@@ -340,4 +345,120 @@ function cargarTablaKebab(){
     });
         
 
+}
+
+function capturarKebab() {
+
+    const imagen=document.getElementById("imagen");
+    const nombre=document.getElementById("nombre");
+    const descripcion=document.getElementById("descripcion");
+    const precio=document.getElementById("precioEmpresa");
+    const seleccionados=Array.from(document.getElementById("ingredientes").children);
+    var ingredientes=[];
+    seleccionados.forEach(function(elemento){
+        ingredientes.push(elemento.ingrediente);
+    });
+    
+    console.log(precio.value);
+    console.log(ingredientes);
+    // modificamos el kebab base que tenemos con los parametros nuevos
+    imagen.kebab.id=null;
+    imagen.kebab.foto=nombre.value+"."+obtenerExtensionBase64(imagen.src);
+    imagen.kebab.imagen=imagen.src;
+    imagen.kebab.nombre=nombre.value;
+    imagen.kebab.descripcion=descripcion.value;
+    imagen.kebab.precio=precio.value;
+    imagen.kebab.ingredientes=ingredientes;
+    console.log(imagen.kebab);
+    // validamos el kebab
+    let errores=validarKebab(imagen.kebab);
+    console.log(errores);
+    console.log(errores.length);
+    if(errores.length===0){
+    // enviar el kebab a la api
+    fetch('https://www.mykebab.com/mantenimiento/kebab', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(imagen.kebab)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if(data["message"]=="guardado correctamente"){
+            alert("Kebab guardado correctamente");
+            // recargamos la pagina
+            location.reload();
+        }else{
+            alert(data["message"]);
+        }
+    })
+    .catch(error => {
+        console.error("Error al guardar el kebab:", error);
+    });
+    }else{
+        alert("No se pudo guardar el kebab"); 
+        const error=document.getElementById("errores");
+        error.innerHTML="";
+        error.innerHTML=errores;
+    }
+}
+
+function validarKebab(kebab) {
+    let errores = [];
+
+    // Validar que ID sea null
+    if (kebab.id !== null) {
+        errores.push("El ID debe ser null.");
+    }
+
+    // Validar que nombre no esté vacío
+    if (!kebab.nombre || kebab.nombre.trim() === "") {
+
+        errores.push("El nombre no puede estar vacío.");
+    }
+
+    // Validar que foto no esté vacía
+    if (!kebab.foto || kebab.foto.trim() === "") {
+        errores.push("La foto no puede estar vacía.");
+    }
+
+    // Validar que descripción no esté vacía
+    if (!kebab.descripcion || kebab.descripcion.trim() === "") {
+        errores.push("La descripción no puede estar vacía.");
+    }
+
+    // Validar que precio sea un número válido y no esté vacío
+    if (!kebab.precio || isNaN(parseFloat(kebab.precio))) {
+        errores.push("El precio debe ser un número válido y no puede estar vacío.");
+    }
+
+    // Validar que ingredientes no esté vacío
+    if (!kebab.ingredientes || kebab.ingredientes.length === 0) {
+        errores.push("Debe haber al menos un ingrediente.");
+    }
+
+    // Validar que la imagen no tenga el src por defecto
+    console.log(kebab.imagen);
+    if (kebab.imagen === "https://www.mykebab.com/imagenes/foto.png") {
+        errores.push("Debe seleccionar una imagen válida.");
+    }
+
+    return errores;
+}
+
+
+function obtenerExtensionBase64(base64String) {
+    // Divide la cadena en dos partes usando la coma como separador
+    const partes = base64String.split(",");
+    if (partes.length > 1) {
+        // Extrae el tipo MIME de la primera parte (data:image/<tipo>;base64)
+        const mimeType = partes[0].match(/data:image\/([a-zA-Z0-9]+);base64/);
+        if (mimeType && mimeType[1]) {
+            // Devuelve la extensión basada en el tipo MIME
+            return mimeType[1];
+        }
+    }
+    return null; // Devuelve null si no se encuentra un tipo MIME válido
 }

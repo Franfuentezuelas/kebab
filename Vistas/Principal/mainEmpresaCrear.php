@@ -56,9 +56,10 @@
                     </div>
 
                     <!-- Botones -->
-                    <div class="actions">
+                    <div class="actions" id="salvar">
                         <!-- <button class="btn btn-secondary">Volver</button> -->
                         <button class="btn btn-primary" id="guardar">Guardar</button>
+                        <span id="errores"></span>
                     </div>
                 </div>
             </div>

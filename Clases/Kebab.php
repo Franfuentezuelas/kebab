@@ -30,7 +30,9 @@ class Kebab implements ToJSON {
         $this->precio = $this->calculaPrecio();
         }
 
-        if($id==null){
+        if($id==null && $kebab_id==null){
+            $this->id=RepoKebab::nuevo($this);
+        }elseif($id==null){
             $this->id=RepoKebab::findByIngredientes($kebab_id,$ingredientes, $this)->id;
         }else{
             $this->id = $id;
