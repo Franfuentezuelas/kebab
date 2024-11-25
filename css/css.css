@@ -247,8 +247,8 @@ h2 {
 main section{
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /*flex-direction: column;
+    justify-content: center;*/
 }
 
 .titulo-container h2 {
