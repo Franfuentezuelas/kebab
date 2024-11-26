@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
         const nuevaVentana = window.open(
             'https://www.mykebab.com/foto', 
             '_blank',
-            'width=800,height=600,scrollbars=yes'
+            'width=800,height=800,scrollbars=yes'
         );
         
         if (!nuevaVentana) {
