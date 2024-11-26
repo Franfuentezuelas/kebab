@@ -591,3 +591,52 @@ table tr td, table tr th {
 #ajustarGrafico {
     width: 100%;
 }
+
+#botonGrafico   {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;        
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.graficoMarcado{
+    background-color: rgb(255, 255, 255);
+    color: rgb(252, 155, 11);
+}
+.graficoMarcado:hover{
+    background-color: rgb(252, 155, 11);
+    color: rgb(255, 255, 255);
+}
+.graficoDesmarcado{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+.graficoDesmarcado:hover{
+    background-color: rgb(50,50,50);
+    color: rgb(255, 255, 255);
+}
+
+
+.graficoNoVisto {
+    opacity: 0; /* Transparente */
+    visibility: hidden; /* Oculto visualmente */
+    height: 0; /* No ocupa espacio vertical */
+    overflow: hidden; /* Esconde contenido mientras la altura es 0 */
+    transition: opacity 2s ease, visibility 2s ease, height 2s ease; /* Transición gradual */
+}
+
+.graficoVisto {
+    opacity: 1; /* Visible */
+    visibility: visible; /* Visible */
+    height: auto; /* Ajusta la altura automáticamente al contenido */
+    transition: opacity 2s ease, visibility 2s ease, height 2s ease; /* Transición gradual */
+}
+
