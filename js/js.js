@@ -11,13 +11,13 @@ window.addEventListener("load", function () {
         // Si no existe, crea un nuevo carrito vacío
         carrito.kebabs = [];
     }
-    console.log(carrito.kebabs);
+   // console.log(carrito.kebabs);
 
     // Actualiza el contador del carrito
     contador.textContent = carrito.kebabs.length;
-    console.log(carrito.kebabs.length);
+    //console.log(carrito.kebabs.length);
     contador.value = carrito.kebabs.length;
-    console.log(carrito.kebabs.length);
+    //console.log(carrito.kebabs.length);
 
     carrito.addEventListener("click", function () {
         
@@ -153,7 +153,7 @@ carrito.kebabs = carrito.kebabs.sort((a, b) => {
     return 0;
 });
 
-console.log(carrito.kebabs);
+//console.log(carrito.kebabs);
 // Recorremos los kebabs
 carrito.kebabs.forEach(function (kebab) {
       
@@ -219,22 +219,23 @@ carrito.kebabs.forEach(function (kebab) {
         menos.addEventListener("click", function() {
             eliminarKebab(this.parentElement.parentElement.kebab);
             let carrito = document.getElementById("carrito");
-
+               
                 actualizarContador(carrito);
                             // Guardamos el carrito actualizado en localStorage
             localStorage.setItem("carrito", JSON.stringify(carrito.kebabs));
                 actualizarCarritoServidor(carrito);
 
                 let cantidad = this.parentElement.getElementsByTagName("div")[1];
-                console.log(cantidad.textContent);
+                //console.log(cantidad.textContent);
                 var resta=parseInt(cantidad.textContent)-1;
                 cantidad.innerHTML="";
                 cantidad.innerHTML=resta;
                 cantidad.cantidad=resta;
+                cantidad.cantidad-=1;
                 const tr = this.parentElement.parentElement
                 let preciounidad = tr.getElementsByTagName("td")[2].precio;
                 preciounidad=preciounidad;
-                console.log(preciounidad);
+                //console.log(preciounidad);
                 let actualizarpreciototal = tr.getElementsByTagName("td")[4];
                 actualizarpreciototal.innerHTML = "";
                 actualizarpreciototal.innerHTML = (resta*preciounidad).toFixed(2)+"€";
@@ -250,7 +251,7 @@ carrito.kebabs.forEach(function (kebab) {
             // si llega a 0 se elimina la fila que contiene el elemento
             if (cantidad.cantidad === 0) {
                  // Encuentra el <tr> correspondiente
-                console.log(tr);
+                //console.log(tr);
                 if (tr) {
                     tr.remove(); // Elimina la fila completa de la tabla
                 }
@@ -261,18 +262,19 @@ carrito.kebabs.forEach(function (kebab) {
             agregarKebab(this.parentElement.parentElement.kebab);
 
             let carrito = document.getElementById("carrito");
-        
+
             let cantidad = this.parentElement.getElementsByTagName("div")[1];
-            console.log(cantidad.textContent);
+            //console.log(cantidad.textContent);
             var suma=parseInt(cantidad.textContent)+1;
             cantidad.innerHTML="";
             cantidad.innerHTML=suma;
             cantidad.cantidad=suma;
+            cantidad.cantidad+=1;
 
             const tr = this.parentElement.parentElement
             let preciounidad = tr.getElementsByTagName("td")[2].precio;
             preciounidad=preciounidad;
-            console.log(preciounidad);
+            //console.log(preciounidad);
             let actualizarpreciototal = tr.getElementsByTagName("td")[4];
             actualizarpreciototal.innerHTML = "";
             actualizarpreciototal.innerHTML = (suma*preciounidad).toFixed(2)+"€";
@@ -349,7 +351,19 @@ carrito.kebabs.forEach(function (kebab) {
         // eventos de los botones
         eliminar.addEventListener("click", function() {
             alert("Esta seguro que quiere eliminar este kebab?");
-        });
+            let padre=Array.from(this.parentElement.parentElement.children);
+            //console.log(padre);
+            let cantidad=padre[1].getElementsByClassName("unidades")[0];
+
+            console.log(cantidad.textContent);
+            var numero = parseInt(cantidad.textContent);
+            while(numero>0){
+                menos.click();
+                numero --;
+            }
+           
+        }); 
+       
         modificar.addEventListener("click", function() {
             alert("Esta seguro que quiere modificar este kebab?");
         });
@@ -506,7 +520,7 @@ carrito.kebabs.forEach(function (kebab) {
                     .then(response => response.text())
                     .then(data => {
                         
-                        console.log(data);
+                        //console.log(data);
                 
                         
                             // Mostrar mensaje de compra
@@ -685,9 +699,13 @@ carrito.kebabs.forEach(function (kebab) {
                         logoutButton.style.border = "none";
                         logoutButton.style.borderRadius = "4px";
                         logoutButton.style.cursor = "pointer";
+                        logoutButton.id="cerrarSesion";
                         logoutButton.addEventListener("click", function () {
                             // Borrar el carrito del local storage
                             localStorage.removeItem("carrito");
+                            carrito.kebabs = [];
+                            actualizarContador(carrito);
+
                            fetch('https://www.mykebab.com/usuario/logout')
                             .then(response => response.text())
                             .then(data => {
@@ -696,9 +714,9 @@ carrito.kebabs.forEach(function (kebab) {
                             .catch(error => {
                                 console.error("Error al actualizar el carrito:", error);
                             });
-                          
+                            
                                 location.href = "carta";
-                        
+                                
 
                         });
                         confirmationBox.appendChild(logoutButton);
@@ -929,7 +947,7 @@ async function actualizarCarritoServidor(carrito) {
 
         const data = await response.json();
         console.log(data.message); // Esto mostrará el mensaje de éxito, si lo hay
-        console.log(data.carrito);  // Mostramos el carrito actualizado
+        //console.log(data.carrito);  // Mostramos el carrito actualizado
     } catch (error) {
         console.error('Error al actualizar el carrito en el servidor:', error);
     }
@@ -950,7 +968,7 @@ function compararIngredientes(ingredientesA, ingredientesB) {
 
 function eliminarKebab(kebab) {
     var carrito=document.getElementById("carrito");
-    console.log(carrito.kebabs);
+    //console.log(carrito.kebabs);
     // Encuentra el índice del kebab en el array
     const index = carrito.kebabs.findIndex(k => 
         k.nombre === kebab.nombre &&
@@ -965,7 +983,7 @@ function eliminarKebab(kebab) {
     } else {
         console.log("El kebab no se encontró en el carrito.");
     }
-    console.log(carrito.kebabs);
+    //console.log(carrito.kebabs);
 
 
 }
@@ -973,9 +991,9 @@ function eliminarKebab(kebab) {
 function agregarKebab(kebab) {
     
     var carrito=document.getElementById("carrito");
-    console.log(carrito.kebabs);
+    //console.log(carrito.kebabs);
     carrito.kebabs.push(kebab);
-    console.log(carrito.kebabs);
+    //console.log(carrito.kebabs);
 
 }
 

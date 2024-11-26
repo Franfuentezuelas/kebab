@@ -1,8 +1,8 @@
 /* Contenedor principal con la imagen de fondo */
 #contenedor {
     position: relative;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     /*background-image: url("../imagenes/imagen.jpeg");*/
     background-position: 0px 0px;
     background-repeat: no-repeat; /* Asegura que la imagen no se repita */
@@ -26,8 +26,8 @@
 /* Capa enfocada */
 #foco {
     position: absolute;
-    top: 100px; /* Ajusta la posición según donde quieras el área enfocada */
-    left: 100px;
+    top: 50px; /* Ajusta la posición según donde quieras el área enfocada */
+    left: 50px;
     width: 400px;
     height: 400px;
     /*background-image: url("../imagenes/imagen.jpeg");*/

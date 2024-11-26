@@ -1,5 +1,6 @@
-
 <script src="js/jsCrearKebab.js"></script><!-- JS personalizado -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/jsGrafico.js"></script><!-- JS personalizado -->
 
 <link rel="stylesheet" href="css/pedidos.css"><!-- CSS personalizado -->
     

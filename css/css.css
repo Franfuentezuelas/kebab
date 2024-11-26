@@ -29,7 +29,7 @@ header {
     justify-content: space-between; /* Centra los elementos horizontalmente */
     
     padding: 10px; /* Espaciado interno del header */
-    background-color: #fc9b0b; /* Color de fondo del header */
+    background-color: rgb(252, 155, 11); /* Color de fondo del header */
     color: #fff; /* Color del texto del header */
     position: relative; /* Para posicionar los elementos hijos de forma absoluta */
 }
@@ -577,4 +577,17 @@ table tr td, table tr th {
 #salvar {
     display:flex;
     flex-direction: column;
+}
+
+#grafico{
+    display:flex;
+    flex-direction: column;
+}
+
+#myChart {
+    width: 100%;
+}
+
+#ajustarGrafico {
+    width: 100%;
 }

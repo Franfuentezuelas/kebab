@@ -9,17 +9,21 @@
    
 </head>
 <body>
-    <input type="file" id="imagen" accept="image/*">
-    <button id="cargar">Cargar imagen</button>
-    <br>
-    <button id="activarCamara">Camara</button>
-    <button id="foto" disabled>Hacer foto</button>
-
+    <div>
+    <input type="file" id="imagen" accept="image/*" class="cargaImagen">
+    <button id="cargar" class="cargaImagen">Cargar imagen</button>
+    </div>
+    <div>
+    <button id="activarCamara" class="hacerFoto">Camara</button>
+    <button id="foto" disabled class="hacerFoto">Hacer foto</button>
+    </div>
+    <div>
+    <button id="guardar" class="guardarImagen">Guardar</button>
+    </div>
     <div id="contenedor">
         <canvas id="canvas"></canvas>
         <div id="difuminado"></div>
         <div id="foco"></div>
     </div>
-    <button id="guardar">Guardar</button>
 </body>
 </html>
