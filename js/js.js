@@ -361,14 +361,12 @@ carrito.kebabs.forEach(function (kebab) {
                 menos.click();
                 numero --;
             }
-           
         }); 
        
         modificar.addEventListener("click", function() {
             alert("Esta seguro que quiere modificar este kebab?");
         });
         
-    
 
         tr.appendChild(nombre);
         tr.appendChild(unidad);
