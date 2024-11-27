@@ -518,8 +518,11 @@ carrito.kebabs.forEach(function (kebab) {
                     .then(response => response.text())
                     .then(data => {
                         //console.log(data);
-                
-                        if(data === "ok"){
+                        console.log(data);
+                        if(data == "no logado"){
+                            location.href = "login";
+                        }else{
+                        
                             // Mostrar mensaje de compra
                             const message = document.createElement("p");
                             message.textContent = "¡Compra realizada con éxito!";
@@ -560,8 +563,6 @@ carrito.kebabs.forEach(function (kebab) {
 
                             }, 2000); // 3000 milisegundos = 3 segundos
 
-                        }else{
-                            location.href = "login";
                         }
                     })
                     .catch(error => {
