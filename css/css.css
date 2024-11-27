@@ -624,7 +624,6 @@ table tr td, table tr th {
     color: rgb(255, 255, 255);
 }
 
-
 .graficoNoVisto {
     opacity: 0; /* Transparente */
     visibility: hidden; /* Oculto visualmente */

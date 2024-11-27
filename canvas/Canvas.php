@@ -9,15 +9,15 @@
    
 </head>
 <body>
-    <div>
+    <div class="cargaImagen">
     <input type="file" id="imagen" accept="image/*" class="cargaImagen">
-    <button id="cargar" class="cargaImagen">Cargar imagen</button>
+    <button id="cargar" class="cargar">Cargar imagen</button>
     </div>
-    <div>
+    <div class="camara">
     <button id="activarCamara" class="hacerFoto">Camara</button>
     <button id="foto" disabled class="hacerFoto">Hacer foto</button>
     </div>
-    <div>
+    <div class="guardando">
     <button id="guardar" class="guardarImagen">Guardar</button>
     </div>
     <div id="contenedor">
