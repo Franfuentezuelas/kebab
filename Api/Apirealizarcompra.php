@@ -54,5 +54,5 @@ if(loguear::estaLogado()){
      
 }else{
     http_response_code(403); // Usualmente se usa el código 403 no tiene permiso ya que no hay sesion iniciada
-    echo "";
+    echo "no logado";
 }
