@@ -27,7 +27,7 @@ class Principal
             }
         }
        
-        if (isset($_SESSION["user"]) && $_SESSION['user']->tipo !== Tipo::USUARIO && $_GET['var']=="inicio"){
+        if (isset($_SESSION["user"]) && $_SESSION['user']->tipo !== Tipo::USUARIO && isset($_GET['var']) && $_GET['var']=="inicio"){
             $_GET['var']="pedidos";
         }
         //require_once './helper/sesion.php';
